@@ -7,7 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E27B04C71E61E637004A4742 /* Ground.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E27B04C61E61E637004A4742 /* Ground.cpp */; };
 		E2FA003E1E5E3FAA00301C8A /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E2FA003D1E5E3FAA00301C8A /* main.cpp */; };
+		E2FA00461E5E3FF700301C8A /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E2FA00451E5E3FF700301C8A /* GLUT.framework */; };
+		E2FA00481E5E3FFC00301C8A /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E2FA00471E5E3FFC00301C8A /* OpenGL.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -23,8 +26,12 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		E27B04C41E61CF5A004A4742 /* Ground.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Ground.hpp; sourceTree = "<group>"; };
+		E27B04C61E61E637004A4742 /* Ground.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Ground.cpp; sourceTree = "<group>"; };
 		E2FA003A1E5E3FAA00301C8A /* CGLand */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = CGLand; sourceTree = BUILT_PRODUCTS_DIR; };
 		E2FA003D1E5E3FAA00301C8A /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		E2FA00451E5E3FF700301C8A /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = System/Library/Frameworks/GLUT.framework; sourceTree = SDKROOT; };
+		E2FA00471E5E3FFC00301C8A /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -32,6 +39,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E2FA00481E5E3FFC00301C8A /* OpenGL.framework in Frameworks */,
+				E2FA00461E5E3FF700301C8A /* GLUT.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -43,6 +52,7 @@
 			children = (
 				E2FA003C1E5E3FAA00301C8A /* CGLand */,
 				E2FA003B1E5E3FAA00301C8A /* Products */,
+				E2FA00441E5E3FF700301C8A /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -58,8 +68,19 @@
 			isa = PBXGroup;
 			children = (
 				E2FA003D1E5E3FAA00301C8A /* main.cpp */,
+				E27B04C41E61CF5A004A4742 /* Ground.hpp */,
+				E27B04C61E61E637004A4742 /* Ground.cpp */,
 			);
 			path = CGLand;
+			sourceTree = "<group>";
+		};
+		E2FA00441E5E3FF700301C8A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				E2FA00471E5E3FFC00301C8A /* OpenGL.framework */,
+				E2FA00451E5E3FF700301C8A /* GLUT.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -119,6 +140,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E27B04C71E61E637004A4742 /* Ground.cpp in Sources */,
 				E2FA003E1E5E3FAA00301C8A /* main.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -216,6 +238,7 @@
 		E2FA00421E5E3FAA00301C8A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -223,6 +246,7 @@
 		E2FA00431E5E3FAA00301C8A /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -246,6 +270,7 @@
 				E2FA00431E5E3FAA00301C8A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
