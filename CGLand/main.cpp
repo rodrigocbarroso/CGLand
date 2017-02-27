@@ -19,8 +19,14 @@
 #include <stdio.h>
 
 #include "Ground.hpp"
+#include "camera.h"
+
+#define ShowUpvector
+
+CCamera Camera;
 
 float posCameraX,posCameraY,posCameraZ;
+float pitch, yaw, walk;
 Ground g1 = *new Ground(5,5,5,80,20);
 
 
@@ -30,39 +36,64 @@ void init(void)
     //inicializa posição da câmera
     posCameraX = 0.3;
     posCameraY = 0.4;
-    posCameraZ = -2;
-    
+    posCameraZ = -10;
+    //inicializa olhar da câmera
+    pitch = 0.0;
+    yaw = 0.0;
+    walk = -10.0;
    
     
 }
 
 // Testador de teclados
-void specialKeys(int key, int x, int y)
+void KeyDown(unsigned char key, int x, int y)
 {
-    float angulo = 2*M_PI/180;
-    switch (key) {
-        case GLUT_KEY_LEFT :
-            posCameraX =  posCameraX*cos(-angulo) + posCameraZ*sin(-angulo);
-            posCameraZ = -posCameraX*sin(-angulo) + posCameraZ*cos(-angulo);
-            break;
-        case GLUT_KEY_RIGHT :
-            posCameraX =  posCameraX*cos(angulo) + posCameraZ*sin(angulo);
-            posCameraZ = -posCameraX*sin(angulo) + posCameraZ*cos(angulo);
-            break;
-        case GLUT_KEY_PAGE_UP :
-            posCameraY = posCameraY+0.3;
-            break;
-        case GLUT_KEY_PAGE_DOWN :
-            posCameraY = posCameraY-0.3;
-            break;
-        case GLUT_KEY_HOME :
-            posCameraZ = posCameraZ+0.3;
-            break;
-        case GLUT_KEY_END :
-            posCameraZ = posCameraZ-0.3;
-            break;
-    }
-    glutPostRedisplay();
+	switch (key) 
+	{
+	case 27:		//ESC
+		//PostQuitMessage(0);
+		break;
+	case 'a':		
+		Camera.RotateY(5.0);
+		break;
+	case 'd':		
+		Camera.RotateY(-5.0);
+		break;
+	case 'w':		
+		Camera.MoveForward( -0.1 ) ;
+		break;
+	case 's':		
+		Camera.MoveForward( 0.1 ) ;
+		break;
+	case 'x':		
+		Camera.RotateX(5.0);
+		break;
+	case 'y':		
+		Camera.RotateX(-5.0);
+		break;
+	case 'c':		
+		Camera.StrafeRight(-0.1);
+		break;
+	case 'v':		
+		Camera.StrafeRight(0.1);
+		break;
+	case 'f':
+		Camera.MoveUpward(-0.3);
+		break;
+	case 'r':
+		Camera.MoveUpward(0.3);
+		break;
+
+	case 'm':
+		Camera.RotateZ(-5.0);
+		break;
+	case 'n':
+		Camera.RotateZ(5.0);
+		break;
+
+	}
+	
+	glutPostRedisplay();
 }
 
 void display(void)
@@ -72,22 +103,30 @@ void display(void)
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
     
-    gluLookAt (posCameraX, posCameraY, posCameraZ, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0);
+    Camera.Render();
+    
+    glTranslatef(-1.0,-0.5,-7.0);
     
     glColor3f (0.7, 0.7, 1.0);
     glutWireTeapot(0.5);
     //glutWireSphere(0.5,20,20);
+
     
     //visualização dos eixos
     //exercício: faça um plano sob a chaleira
-    /* glBegin(GL_QUADS);
+    glBegin(GL_LINES);
+    glLineWidth(10.0);
     glColor3f(1.0,0.0,0.0);
     glVertex3f(0.0, 0.0, 0.0);
     glVertex3f(10.0, 0.0, 0.0);
-    glVertex3f(10.0, 0.0, 10.0);
+    glColor3f(0.0,1.0,0.0);
+    glVertex3f(0.0, 0.0, 0.0);
+    glVertex3f(0.0, 10.0, 0.0);
+    glColor3f(0.0,0.0,1.0);
+    glVertex3f(0.0, 0.0, 0.0);
     glVertex3f(0.0, 0.0, 10.0);
     glEnd();
-     */
+    
     g1.generateIsle();
 
     //troca de buffers, o flush é implícito aqui
@@ -118,7 +157,7 @@ int main(int argc, char** argv)
     init ();
     
     glutDisplayFunc(display);
-    glutSpecialFunc(specialKeys);
+    glutKeyboardFunc(KeyDown);
     glutReshapeFunc(reshape);
     
     glutMainLoop();
