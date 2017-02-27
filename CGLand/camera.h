@@ -6,7 +6,13 @@
 //***************************************************************************
 
 
-#include <GL/glut.h>		// Need to include it here because the GL* types are required
+#ifdef __APPLE__
+#include <GLUT/glut.h>
+#include <OpenGL/gl.h>
+#else
+#include <GL/glut.h>
+#include <GL/gl.h>
+#endif		// Need to include it here because the GL* types are required
 #define PI 3.1415926535897932384626433832795
 #define PIdiv180 (PI/180.0)
 

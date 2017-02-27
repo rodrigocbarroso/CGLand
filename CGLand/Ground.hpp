@@ -22,23 +22,29 @@
 #include <GL/glut.h>
 #include <GL/gl.h>
 #endif
+#include "Wall.hpp"
 
 
 
 class Ground {
     
+public:
     int sizeX, sizeY, sizeZ; //tamanho da ilha
     int groundP; // porcentagem de chao
     int lakeP; // porcentagem de lago
+    Wall walls[100]; //esta matriz contem todas as walls que deverao ser evitadas pelos bixos
+    int wallsLength = 0; //tamanho real da matriz
     
     // funcao chamada pelo main() para desenhar a ilha
     
     public:
     Ground(int x, int y, int z, int g, int l);
+    Ground();
+    void setParams(int x, int y, int z, int g, int l);
     void drawPatch(int x, int y, int color);
     void drawIsle();
     void generateIsle();
-    
+    void getWalls(); //retorna a matriz de walls
 };
 
 

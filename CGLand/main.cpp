@@ -18,8 +18,11 @@
 #include <math.h>
 #include <stdio.h>
 
+
 #include "Ground.hpp"
 #include "camera.h"
+#include "Zebra.hpp"
+
 
 #define ShowUpvector
 
@@ -28,7 +31,9 @@ CCamera Camera;
 float posCameraX,posCameraY,posCameraZ;
 float pitch, yaw, walk;
 Ground g1 = *new Ground(5,5,5,80,20);
-
+Zebra z = *new Zebra(2.0,2.0,2.0);
+void *walls;
+int wallsLength = 0;
 
 void init(void)
 {
@@ -41,6 +46,11 @@ void init(void)
     pitch = 0.0;
     yaw = 0.0;
     walk = -10.0;
+    
+    g1.generateIsle();
+    
+    
+    
    
     
 }
@@ -104,11 +114,11 @@ void display(void)
     glLoadIdentity();
     
     Camera.Render();
-    
     glTranslatef(-1.0,-0.5,-7.0);
+    glPopMatrix();
     
-    glColor3f (0.7, 0.7, 1.0);
-    glutWireTeapot(0.5);
+    //glColor3f (0.7, 0.7, 1.0);
+    //glutWireTeapot(0.5);
     //glutWireSphere(0.5,20,20);
 
     
@@ -127,7 +137,10 @@ void display(void)
     glVertex3f(0.0, 0.0, 10.0);
     glEnd();
     
-    g1.generateIsle();
+    g1.drawIsle();
+    z.walk(g1.walls, g1.wallsLength);
+    
+    
 
     //troca de buffers, o flush é implícito aqui
     glutSwapBuffers();

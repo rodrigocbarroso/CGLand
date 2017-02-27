@@ -9,6 +9,9 @@
 #include <stdio.h>
 #include "Ground.hpp"
 
+
+
+
 //Construtor
 Ground::Ground(int x, int y, int z, int g, int l) {
     sizeX = x;
@@ -16,6 +19,8 @@ Ground::Ground(int x, int y, int z, int g, int l) {
     sizeZ = z;
     groundP = g;
     lakeP = l;
+    
+    
 }
 
 //Methods
@@ -36,18 +41,50 @@ void Ground::drawPatch(int x, int y, int color) {
      glEnd();
 }
 
+//chamado uma vez, para criar a matriz de walls
 void Ground::generateIsle() {
     //calcula proporcoes da ilha
     //quantidade de ground patches:
-    int qtdG = (groundP * sizeX * sizeY)/100;
-    int qtdL = (lakeP * sizeX * sizeY)/100;
+    int qtdG = (groundP * sizeX * sizeZ)/100;
+    int qtdL = (lakeP * sizeX * sizeZ)/100;
     int proportion = qtdG/qtdL;
     int counter = 0;
+    int wallsIndex = 0;
+    
+    // std::vector<Ground*> grounds;
+    
+    for (int i = 0; i < sizeX; i++) {
+        for (int u = 0; u < sizeY; u++) {
+            if (counter == proportion) {
+                walls[wallsIndex].posX = (float)i;
+                walls[wallsIndex].posY = (float)u;
+                counter = 0; //reseta o proporcionador
+                wallsIndex++;
+            } else {
+                
+            }
+            counter++;
+        }
+    }
+    wallsLength = wallsIndex;
+}
+
+//chamado sempre para desenhar a ilha
+void Ground::drawIsle() {
+    //calcula proporcoes da ilha
+    //quantidade de ground patches:
+    int qtdG = (groundP * sizeX * sizeZ)/100;
+    int qtdL = (lakeP * sizeX * sizeZ)/100;
+    int proportion = qtdG/qtdL;
+    int counter = 0;
+    
+    // std::vector<Ground*> grounds;
     
     for (int i = 0; i < sizeX; i++) {
         for (int u = 0; u < sizeY; u++) {
             if (counter == proportion) {
                 drawPatch(i, u, 4); //adiciona lago
+                
                 counter = 0; //reseta o proporcionador
             } else {
                 drawPatch(i, u, 1); //adiciona terra
@@ -56,3 +93,12 @@ void Ground::generateIsle() {
         }
     }
 }
+
+void Ground::setParams(int x, int y,int  z, int g,int  l) {
+    sizeX = x;
+    sizeY = y;
+    sizeZ = z;
+    groundP = g;
+    lakeP = l;
+}
+
