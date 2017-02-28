@@ -36,6 +36,7 @@ public:
     size_t size = 100;// porcentagem de lago
     std::vector<Wall> walls; //esta matriz contem todas as walls que deverao ser evitadas pelos bixos
     int wallsLength = 0; //tamanho real da matriz
+    int gridIsle[100][100];
     
     // funcao chamada pelo main() para desenhar a ilha
     

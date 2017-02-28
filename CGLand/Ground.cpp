@@ -7,6 +7,7 @@
 //
 
 #include <stdio.h>
+#include <time.h>
 #include "Ground.hpp"
 
 
@@ -20,6 +21,7 @@ Ground::Ground(int x, int y, int z, int g, int l) {
     groundP = g;
     lakeP = l;
     walls.reserve(size);
+    gridIsle[x][y];
     
     
 }
@@ -46,27 +48,55 @@ void Ground::drawPatch(int x, int y, int color) {
 void Ground::generateIsle() {
     //calcula proporcoes da ilha
     //quantidade de ground patches:
-    int qtdG = (groundP * sizeX * sizeZ)/100;
-    int qtdL = (lakeP * sizeX * sizeZ)/100;
+    int qtdG = (groundP * (sizeX-2) * (sizeZ-2))/100;
+    int qtdL = (lakeP * (sizeX-2) * (sizeZ-2))/100;
     int proportion = qtdG/qtdL;
-    int counter = 0;
+    //int counter = 0;
     int wallsIndex = 0;
-    
+    int i = 0;
+    int p = 0;
     // std::vector<Ground*> grounds;
+    for (i=0;i<sizeX;i+=(sizeX-1)) {
+        for (p=0;p<sizeZ;p++){
+            gridIsle[i][p] = 1;
+        }
+    }
+    for (p=0;p<sizeZ;p+=(sizeZ-1)) {
+        for (i=1;i<sizeX;i++){
+            gridIsle[i][p] = 1;
+        }
+    }
     
-    for (int i = 0; i < sizeX; i++) {
-        for (int u = 0; u < sizeY; u++) {
-            if (counter == proportion) {
+    for (p=1;p<(sizeZ-1);p++){
+        for (i=1;i<(sizeX-1);i++){
+            gridIsle[i][p] = 0;
+        }
+    }
+    srand(time(NULL)); //gera a seed do rng
+    for (i = 0; i < qtdL; i++){
+        int x = rand()%sizeX; //coordenada aleatoria x
+        int y = rand()%sizeZ; //coordenada aleatoria y
+        if (gridIsle[x][y] == 1) {
+            i -= 1;
+            continue;
+        }
+        else {
+            gridIsle[x][y] = 1; //ocupa a coordenada com um obstaculo
+        }
+    }
+    
+    //Posicionar as walls----------------------------------------
+    for (p = 0; p < sizeZ; p++) {
+        for (int i = 0; i < sizeX; i++) {
+            if (gridIsle[i][p] == 1) {
                 Wall aux;
                 aux.posX = i + 0.5;
-                aux.posY = u + 0.5;
+                aux.posY = p + 0.5;
                 walls.push_back(aux);
-                counter = 0; //reseta o proporcionador
                 wallsIndex++;
             } else {
                 
             }
-            counter++;
         }
     }
     wallsLength = wallsIndex;
@@ -76,23 +106,24 @@ void Ground::generateIsle() {
 void Ground::drawIsle() {
     //calcula proporcoes da ilha
     //quantidade de ground patches:
-    int qtdG = (groundP * sizeX * sizeZ)/100;
-    int qtdL = (lakeP * sizeX * sizeZ)/100;
-    int proportion = qtdG/qtdL;
-    int counter = 0;
+    //int qtdG = (groundP * (sizeX-2) * (sizeZ-2))/100;
+    //int qtdL = (lakeP * (sizeX-2) * (sizeZ-2))/100;
+    //int proportion = qtdG/qtdL;
+    //int counter = 0;
     
     // std::vector<Ground*> grounds;
-    
-    for (int i = 0; i < sizeX; i++) {
-        for (int u = 0; u < sizeY; u++) {
-            if (counter == proportion) {
-                drawPatch(i, u, 4); //adiciona lago
-                
-                counter = 0; //reseta o proporcionador
+    //-----------------------------------------------------------------
+    int i = 0;
+    int p = 0;
+     
+    //Desenhar o chao----------------------------------------------
+    for (p = 0; p < sizeZ; p++) {
+        for (int i = 0; i < sizeX; i++) {
+            if (gridIsle[i][p] == 1) {
+                drawPatch(i, p, 4); //adiciona lago   
             } else {
-                drawPatch(i, u, 1); //adiciona terra
+                drawPatch(i, p, 1); //adiciona terra
             }
-            counter++;
         }
     }
 }
@@ -103,5 +134,6 @@ void Ground::setParams(int x, int y,int  z, int g,int  l) {
     sizeZ = z;
     groundP = g;
     lakeP = l;
+    gridIsle[x][y];
 }
 

@@ -30,7 +30,7 @@ CCamera Camera;
 
 float posCameraX,posCameraY,posCameraZ;
 float pitch, yaw, walk;
-Ground g1 = *new Ground(5,5,5,80,20);
+Ground g1 = *new Ground(15,12,15,80,20);
 Zebra z = *new Zebra(2.0,2.0,2.0);
 void *walls;
 int wallsLength = 0;
@@ -114,7 +114,7 @@ void display(void)
     glLoadIdentity();
     
     Camera.Render();
-    glTranslatef(-1.0,-0.5,-7.0);
+    glTranslatef(-1.0,-1.5,-10.0); //Posicionamento inicial
     glPopMatrix();
     
     //glColor3f (0.7, 0.7, 1.0);
