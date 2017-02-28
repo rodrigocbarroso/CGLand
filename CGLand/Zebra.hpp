@@ -11,6 +11,7 @@
 
 #include <stdio.h>
 #include "Wall.hpp"
+#include <vector>
 
 
 #endif /* Zebra_hpp */
@@ -24,7 +25,7 @@ class Zebra {
     
 public:
     Zebra(float x, float y, float z);
-    void walk(Wall *walls,int wallsLength);
+    void walk(std::vector<Wall>& walls,int wallsLength);
     void display();
     void die();
     void eat();

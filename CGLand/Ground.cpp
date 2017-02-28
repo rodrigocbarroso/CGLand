@@ -19,6 +19,7 @@ Ground::Ground(int x, int y, int z, int g, int l) {
     sizeZ = z;
     groundP = g;
     lakeP = l;
+    walls.reserve(size);
     
     
 }
@@ -56,8 +57,10 @@ void Ground::generateIsle() {
     for (int i = 0; i < sizeX; i++) {
         for (int u = 0; u < sizeY; u++) {
             if (counter == proportion) {
-                walls[wallsIndex].posX = (float)i;
-                walls[wallsIndex].posY = (float)u;
+                Wall aux;
+                aux.posX = i + 0.5;
+                aux.posY = u + 0.5;
+                walls.push_back(aux);
                 counter = 0; //reseta o proporcionador
                 wallsIndex++;
             } else {

@@ -15,6 +15,7 @@
 
 
 #include <stdio.h>
+#include <vector>
 #ifdef __APPLE__
 #include <GLUT/glut.h>
 #include <OpenGL/gl.h>
@@ -31,8 +32,9 @@ class Ground {
 public:
     int sizeX, sizeY, sizeZ; //tamanho da ilha
     int groundP; // porcentagem de chao
-    int lakeP; // porcentagem de lago
-    Wall walls[100]; //esta matriz contem todas as walls que deverao ser evitadas pelos bixos
+    int lakeP;
+    size_t size = 100;// porcentagem de lago
+    std::vector<Wall> walls; //esta matriz contem todas as walls que deverao ser evitadas pelos bixos
     int wallsLength = 0; //tamanho real da matriz
     
     // funcao chamada pelo main() para desenhar a ilha
