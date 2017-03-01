@@ -7,10 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E21F7D761E664CC6002B4D92 /* Grass.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E21F7D701E664CC6002B4D92 /* Grass.cpp */; };
+		E21F7D771E664CC6002B4D92 /* Wall.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E21F7D721E664CC6002B4D92 /* Wall.cpp */; };
+		E21F7D781E664CC6002B4D92 /* Zebra.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E21F7D741E664CC6002B4D92 /* Zebra.cpp */; };
 		E260643C1E646E4D00A43222 /* camera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E260643A1E646E4D00A43222 /* camera.cpp */; };
 		E26064431E64709700A43222 /* Ground.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E260643D1E64709700A43222 /* Ground.cpp */; };
-		E26064451E64709700A43222 /* Zebra.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E26064411E64709700A43222 /* Zebra.cpp */; };
-		E26064481E64756F00A43222 /* Wall.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E26064461E64756F00A43222 /* Wall.cpp */; };
 		E2FA003E1E5E3FAA00301C8A /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E2FA003D1E5E3FAA00301C8A /* main.cpp */; };
 		E2FA00461E5E3FF700301C8A /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E2FA00451E5E3FF700301C8A /* GLUT.framework */; };
 		E2FA00481E5E3FFC00301C8A /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E2FA00471E5E3FFC00301C8A /* OpenGL.framework */; };
@@ -29,14 +30,16 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		E21F7D701E664CC6002B4D92 /* Grass.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Grass.cpp; sourceTree = "<group>"; };
+		E21F7D711E664CC6002B4D92 /* Grass.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Grass.hpp; sourceTree = "<group>"; };
+		E21F7D721E664CC6002B4D92 /* Wall.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Wall.cpp; sourceTree = "<group>"; };
+		E21F7D731E664CC6002B4D92 /* Wall.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Wall.hpp; sourceTree = "<group>"; };
+		E21F7D741E664CC6002B4D92 /* Zebra.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Zebra.cpp; sourceTree = "<group>"; };
+		E21F7D751E664CC6002B4D92 /* Zebra.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Zebra.hpp; sourceTree = "<group>"; };
 		E260643A1E646E4D00A43222 /* camera.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = camera.cpp; path = "../../../Downloads/CGLand-master/CGLand/camera.cpp"; sourceTree = "<group>"; };
 		E260643B1E646E4D00A43222 /* camera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = camera.h; path = "../../../Downloads/CGLand-master/CGLand/camera.h"; sourceTree = "<group>"; };
 		E260643D1E64709700A43222 /* Ground.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Ground.cpp; sourceTree = "<group>"; };
 		E260643E1E64709700A43222 /* Ground.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Ground.hpp; sourceTree = "<group>"; };
-		E26064411E64709700A43222 /* Zebra.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Zebra.cpp; sourceTree = "<group>"; };
-		E26064421E64709700A43222 /* Zebra.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Zebra.hpp; sourceTree = "<group>"; };
-		E26064461E64756F00A43222 /* Wall.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Wall.cpp; sourceTree = "<group>"; };
-		E26064471E64756F00A43222 /* Wall.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Wall.hpp; sourceTree = "<group>"; };
 		E2FA003A1E5E3FAA00301C8A /* CGLand */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = CGLand; sourceTree = BUILT_PRODUCTS_DIR; };
 		E2FA003D1E5E3FAA00301C8A /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		E2FA00451E5E3FF700301C8A /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = System/Library/Frameworks/GLUT.framework; sourceTree = SDKROOT; };
@@ -81,10 +84,12 @@
 				E260643B1E646E4D00A43222 /* camera.h */,
 				E260643E1E64709700A43222 /* Ground.hpp */,
 				E260643D1E64709700A43222 /* Ground.cpp */,
-				E26064471E64756F00A43222 /* Wall.hpp */,
-				E26064461E64756F00A43222 /* Wall.cpp */,
-				E26064421E64709700A43222 /* Zebra.hpp */,
-				E26064411E64709700A43222 /* Zebra.cpp */,
+				E21F7D701E664CC6002B4D92 /* Grass.cpp */,
+				E21F7D711E664CC6002B4D92 /* Grass.hpp */,
+				E21F7D721E664CC6002B4D92 /* Wall.cpp */,
+				E21F7D731E664CC6002B4D92 /* Wall.hpp */,
+				E21F7D741E664CC6002B4D92 /* Zebra.cpp */,
+				E21F7D751E664CC6002B4D92 /* Zebra.hpp */,
 			);
 			path = CGLand;
 			sourceTree = "<group>";
@@ -157,9 +162,10 @@
 			files = (
 				E260643C1E646E4D00A43222 /* camera.cpp in Sources */,
 				E26064431E64709700A43222 /* Ground.cpp in Sources */,
-				E26064451E64709700A43222 /* Zebra.cpp in Sources */,
+				E21F7D781E664CC6002B4D92 /* Zebra.cpp in Sources */,
+				E21F7D761E664CC6002B4D92 /* Grass.cpp in Sources */,
 				E2FA003E1E5E3FAA00301C8A /* main.cpp in Sources */,
-				E26064481E64756F00A43222 /* Wall.cpp in Sources */,
+				E21F7D771E664CC6002B4D92 /* Wall.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

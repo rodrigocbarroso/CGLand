@@ -9,6 +9,8 @@
 #include <stdio.h>
 #include <time.h>
 #include "Ground.hpp"
+#include <cstdlib>
+#include <ctime>
 
 
 
@@ -100,6 +102,13 @@ void Ground::generateIsle() {
         }
     }
     wallsLength = wallsIndex;
+    
+    //Posicionar GRAMASS
+    Grass test(10);
+    test.posX = 12;
+    test.posY = 12;
+    grasses.push_back(test);
+    
 }
 
 //chamado sempre para desenhar a ilha

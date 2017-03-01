@@ -31,7 +31,7 @@ CCamera Camera;
 float posCameraX,posCameraY,posCameraZ;
 float pitch, yaw, walk;
 Ground g1 = *new Ground(15,12,15,80,20);
-Zebra z = *new Zebra(2.0,2.0,2.0);
+Zebra z = *new Zebra(2.0,2.0,2.0,10);
 void *walls;
 int wallsLength = 0;
 
@@ -138,7 +138,7 @@ void display(void)
     glEnd();
     
     g1.drawIsle();
-    z.walk(g1.walls, g1.wallsLength);
+    z.walk(g1.walls, g1.wallsLength, g1.grasses, g1.grassesLength);
     
     
 

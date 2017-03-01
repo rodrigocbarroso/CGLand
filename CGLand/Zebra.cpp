@@ -7,19 +7,20 @@
 //
 
 #include "Zebra.hpp"
-#include "Ground.hpp"
 #include <math.h>
 #include <iostream>
 
 float dirX = 0.1;
 float dirY = 0.1;
 
-Zebra::Zebra(float x, float y, float z) {
+Zebra::Zebra(float x, float y, float z, int mL) {
     posY = y;
     posX = x;
     posZ = z;
+    massLoss = mL;
 }
 
+//distancia entre pontos (considerando x e y)
 float distance(float x, float y, float u, float v) {
     float calc = ((x-u) * (x-u) + (y-v) * (y-v));
     if (calc < 0) {
@@ -28,6 +29,7 @@ float distance(float x, float y, float u, float v) {
     return sqrt(calc);
 }
 
+//distancia entre pontos, considerando so um eixo;
 float distance2 (float x, float u) {
     float calc = ((x-u) * (x-u));
     if (calc < 0) {
@@ -36,9 +38,10 @@ float distance2 (float x, float u) {
     return sqrt(calc);
 }
 
-
-void Zebra::walk(std::vector<Wall>& walls, int wallsLength) {
+//walk calcula o movimento e chama a funcao display
+void Zebra::walk(std::vector<Wall>& walls, int wallsLength, std::vector<Grass>& grasses, int grassesLength) {
     
+    //checa colisao com invisible walls (lakes e ocean)
     for (int i = 0; i < wallsLength; i++) {
         if ( distance2(posX,walls[i].posX) < 0.6) {
             dirX = dirX * -1;
@@ -47,8 +50,29 @@ void Zebra::walk(std::vector<Wall>& walls, int wallsLength) {
             dirY = dirY * -1;
         }
     }
+    
+    //checa colisao com GRAMA;
+    for (int i = 0; i < wallsLength; i++) {
+        if ( distance2(posX,grasses[i].posX) < 0.4) {
+            grasses[i].shrink();
+            weight = weight + 25; //equivalente a eat()
+            break;
+        }
+        if ( distance2(posY,grasses[i].posY) < 0.3) {
+            dirY = dirY * -1;
+            grasses[i].shrink();
+            weight = weight + 25; //equivalente a eat()
+            break;
+        }
+    }
+    
+    //por iteracao perde massa
+    weight = weight - massLoss;
+    
+    //movimento
     posX = posX + dirX;
     posY = posY + dirY;
+    //exibir
     display();
     
 }
@@ -61,3 +85,6 @@ void Zebra::display() {
     glutSolidTeapot(0.2);
     glPopMatrix();
 }
+
+
+

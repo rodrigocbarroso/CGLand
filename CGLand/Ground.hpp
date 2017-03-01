@@ -24,6 +24,7 @@
 #include <GL/gl.h>
 #endif
 #include "Wall.hpp"
+#include "Grass.hpp"
 
 
 
@@ -35,6 +36,8 @@ public:
     int lakeP;
     size_t size = 100;// porcentagem de lago
     std::vector<Wall> walls; //esta matriz contem todas as walls que deverao ser evitadas pelos bixos
+    std::vector<Grass> grasses; //contem as gramasss!
+    int grassesLength = 0;
     int wallsLength = 0; //tamanho real da matriz
     int gridIsle[100][100];
     

@@ -9,9 +9,18 @@
 #ifndef Zebra_hpp
 #define Zebra_hpp
 
+
+#ifdef __APPLE__
+#include <GLUT/glut.h>
+#include <OpenGL/gl.h>
+#else
+#include <GL/glut.h>
+#include <GL/gl.h>
+#endif
 #include <stdio.h>
 #include "Wall.hpp"
 #include <vector>
+#include "Grass.hpp"
 
 
 #endif /* Zebra_hpp */
@@ -24,8 +33,8 @@ class Zebra {
     int massLoss = 1;
     
 public:
-    Zebra(float x, float y, float z);
-    void walk(std::vector<Wall>& walls,int wallsLength);
+    Zebra(float x, float y, float z, int massLoss);
+    void walk(std::vector<Wall>& walls,int wallsLength, std::vector<Grass>& grasses, int grassesLength); //sera chamada pelo main.
     void display();
     void die();
     void eat();
