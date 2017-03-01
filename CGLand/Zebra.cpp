@@ -43,12 +43,18 @@ void Zebra::walk(std::vector<Wall>& walls, int wallsLength, std::vector<Grass>& 
     
     //checa colisao com invisible walls (lakes e ocean)
     for (int i = 0; i < wallsLength; i++) {
-        if ( distance2(posX,walls[i].posX) < 0.6) {
-            dirX = dirX * -1;
+        if ( distance2(posX,walls[i].posX) < 0.4) {
+            std::cout << distance2(posX,walls[i].posX);
+            dirX = -dirX;
+            
         }
-        if ( distance2(posY,walls[i].posY) < 0.7) {
-            dirY = dirY * -1;
+        if ( distance2(posY,walls[i].posY) < 0.4) {
+            std::cout << distance2(posY,walls[i].posY);
+
+            dirY = -dirY;
         }
+
+        
     }
     
     //checa colisao com GRAMA;

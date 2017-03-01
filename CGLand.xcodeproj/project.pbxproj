@@ -10,6 +10,7 @@
 		E21F7D761E664CC6002B4D92 /* Grass.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E21F7D701E664CC6002B4D92 /* Grass.cpp */; };
 		E21F7D771E664CC6002B4D92 /* Wall.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E21F7D721E664CC6002B4D92 /* Wall.cpp */; };
 		E21F7D781E664CC6002B4D92 /* Zebra.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E21F7D741E664CC6002B4D92 /* Zebra.cpp */; };
+		E21F7D7B1E67190C002B4D92 /* Lion.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E21F7D791E67190C002B4D92 /* Lion.cpp */; };
 		E260643C1E646E4D00A43222 /* camera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E260643A1E646E4D00A43222 /* camera.cpp */; };
 		E26064431E64709700A43222 /* Ground.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E260643D1E64709700A43222 /* Ground.cpp */; };
 		E2FA003E1E5E3FAA00301C8A /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E2FA003D1E5E3FAA00301C8A /* main.cpp */; };
@@ -36,6 +37,8 @@
 		E21F7D731E664CC6002B4D92 /* Wall.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Wall.hpp; sourceTree = "<group>"; };
 		E21F7D741E664CC6002B4D92 /* Zebra.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Zebra.cpp; sourceTree = "<group>"; };
 		E21F7D751E664CC6002B4D92 /* Zebra.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Zebra.hpp; sourceTree = "<group>"; };
+		E21F7D791E67190C002B4D92 /* Lion.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Lion.cpp; sourceTree = "<group>"; };
+		E21F7D7A1E67190C002B4D92 /* Lion.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Lion.hpp; sourceTree = "<group>"; };
 		E260643A1E646E4D00A43222 /* camera.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = camera.cpp; path = "../../../Downloads/CGLand-master/CGLand/camera.cpp"; sourceTree = "<group>"; };
 		E260643B1E646E4D00A43222 /* camera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = camera.h; path = "../../../Downloads/CGLand-master/CGLand/camera.h"; sourceTree = "<group>"; };
 		E260643D1E64709700A43222 /* Ground.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Ground.cpp; sourceTree = "<group>"; };
@@ -90,6 +93,8 @@
 				E21F7D731E664CC6002B4D92 /* Wall.hpp */,
 				E21F7D741E664CC6002B4D92 /* Zebra.cpp */,
 				E21F7D751E664CC6002B4D92 /* Zebra.hpp */,
+				E21F7D791E67190C002B4D92 /* Lion.cpp */,
+				E21F7D7A1E67190C002B4D92 /* Lion.hpp */,
 			);
 			path = CGLand;
 			sourceTree = "<group>";
@@ -161,6 +166,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E260643C1E646E4D00A43222 /* camera.cpp in Sources */,
+				E21F7D7B1E67190C002B4D92 /* Lion.cpp in Sources */,
 				E26064431E64709700A43222 /* Ground.cpp in Sources */,
 				E21F7D781E664CC6002B4D92 /* Zebra.cpp in Sources */,
 				E21F7D761E664CC6002B4D92 /* Grass.cpp in Sources */,
