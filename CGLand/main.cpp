@@ -17,8 +17,6 @@
 #endif
 #include <math.h>
 #include <stdio.h>
-
-
 #include "Ground.hpp"
 #include "camera.h"
 #include "Zebra.hpp"
@@ -31,7 +29,7 @@ CCamera Camera;
 float posCameraX,posCameraY,posCameraZ;
 float pitch, yaw, walk;
 Ground g1 = *new Ground(15,12,15,80,20);
-Zebra z = *new Zebra(2.0,2.0,2.0,10);
+Zebra z = *new Zebra(10.0,6.0,5.0,10);
 void *walls;
 int wallsLength = 0;
 
@@ -49,6 +47,8 @@ void init(void)
     
     g1.generateIsle();
     
+    glEnable(GL_TEXTURE_2D);
+
     
     
    
@@ -162,7 +162,7 @@ void reshape(int w, int h)
 int main(int argc, char** argv)
 {
     glutInit(&argc, argv);
-    glutInitDisplayMode (GLUT_DOUBLE | GLUT_RGB);
+    glutInitDisplayMode (GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
     glutInitWindowSize (500, 500);
     glutInitWindowPosition (100, 100);
     glutCreateWindow ("CGLand");
