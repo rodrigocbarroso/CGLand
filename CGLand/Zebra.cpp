@@ -71,10 +71,10 @@ void Zebra::walk(std::vector<Wall>& walls, int wallsLength, std::vector<Grass>& 
         
         //se a proxima posicao esta ocupada
         if (((posX + dirX) == walls[i].posX) && ((posY + dirY) == walls[i].posY)) {
-            std::cout << "parede: X ";
+            /* std::cout << "parede: X ";
             std::cout << walls[i].posX;
             std::cout << " Y : ";
-            std::cout << walls[i].posY;
+            std::cout << walls[i].posY; */
             if ((dirX == 1) && (dirY == 0)) {
                 dirX = 0;
                 dirY = 1;
@@ -98,25 +98,23 @@ void Zebra::walk(std::vector<Wall>& walls, int wallsLength, std::vector<Grass>& 
     posX = posX + dirX;
     posY = posY + dirY;
     
-    std::cout << " X: ";
+    /*std::cout << " X: ";
     std::cout << posX;
     std::cout << " Y: ";
     std::cout << posY;
-    std::cout << std::endl;
+    std::cout << std::endl; */
     
     
     //checa colisao com GRAMA;
     for (int i = 0; i < wallsLength; i++) {
         
-        if ( distance2(posX,grasses[i].posX) < 0.4) {
+        if ((posX == grasses[i].posX) && (posY == grasses[i].posY)) {
+            //std::cout << "comeu";
             grasses[i].shrink();
-            weight = weight + 25; //equivalente a eat()
-            break;
-        }
-        if ( distance2(posY,grasses[i].posY) < 0.3) {
-            dirY = dirY * -1;
-            grasses[i].shrink();
-            weight = weight + 25; //equivalente a eat()
+            if (weight < weightMAX) {
+                weight = weight + 25; //equivalente a eat()
+            }
+
             break;
         }
     }

@@ -15,11 +15,15 @@ Grass::Grass(int gR) {
 }
 
 void Grass::grow() {
-    size = size + growthRate;
+    if (size < sizeMax) {
+        size = size + growthRate;
+    }
+    
 }
 
 void Grass::shrink() {
-    size = size - 25;
+    size = 100;
+    
 }
 
 void Grass::display() {

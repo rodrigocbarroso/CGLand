@@ -171,12 +171,12 @@ void display(void)
     for (int i = 0; i < g1.grassesLength; i++) {
         glMatrixMode(GL_MODELVIEW);
         glPushMatrix();
-
         glTranslatef(g1.grasses[i].posX, 0.0, g1.grasses[i].posY);
-        glScalef(0.2,0.2,0.2);
+        glScalef(0.2*g1.grasses[i].size*0.001,0.2*g1.grasses[i].size*0.001,0.2*g1.grasses[i].size*0.001);
         glColor3f(0.0,0.5,0.0);
         grassMdl->desenhar();
         grassMdl->desenharTextura();
+        g1.grasses[i].grow();
         glPopMatrix();
     }
     
