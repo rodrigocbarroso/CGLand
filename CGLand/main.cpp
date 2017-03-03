@@ -19,7 +19,7 @@
 #include <stdio.h>
 #include "Ground.hpp"
 #include "camera.h"
-#include "Zebra.hpp"
+//#include "Zebra.hpp"
 #include "carregadorObj.cpp"
 
 
@@ -150,6 +150,7 @@ void display(void)
     z.walk(g1.walls, g1.wallsLength, g1.grasses, g1.grassesLength);
     
     //desenha zebra ------------
+    /*
     glBegin(GL_QUADS);
     glColor3f(1.0, 0.1, 1.0);
     glVertex3f(z.posX-0.5, 0.1, z.posY-0.5);
@@ -162,10 +163,21 @@ void display(void)
     glTranslatef(z.posX, 0.0, z.posY);
     glRotatef(z.rotation, 0.0, 1.0, 0.0);
     glScalef(0.3,0.3,0.3);
+    
 
     //glColor3f(1.0,0.0,0.0);
     zeb->desenhar();
     glPopMatrix();
+    */
+    for (int i = 0; i < g1.zebrasLength; i++) {
+        glMatrixMode(GL_MODELVIEW);
+        glPushMatrix();
+        glTranslatef(g1.zebras[i].posX, 0.0, g1.zebras[i].posY);
+        glScalef(0.3,0.3,0.3);
+        glColor3f(1.0,0.1,1.0);
+        zeb->desenhar();
+        glPopMatrix();
+    }
     
     //desenha gramas --------------
     for (int i = 0; i < g1.grassesLength; i++) {

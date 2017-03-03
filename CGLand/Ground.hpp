@@ -25,7 +25,7 @@
 #endif
 #include "Wall.hpp"
 #include "Grass.hpp"
-//#include "Zebra.hpp"
+#include "Zebra.hpp"
 //#include "Lion.hpp"
 
 
@@ -39,9 +39,10 @@ public:
     size_t size = 100;// porcentagem de lago
     std::vector<Wall> walls; //esta matriz contem todas as walls que deverao ser evitadas pelos bixos
     std::vector<Grass> grasses; //contem as gramasss!
-    //std::vector<Zebra> zebras;
+    std::vector<Zebra> zebras;
     //std::vector<Lion> lions;
     int grassesLength = 0;
+    int zebrasLength = 0;
     int wallsLength = 0; //tamanho real da matriz
     int gridIsle[100][100];
     
