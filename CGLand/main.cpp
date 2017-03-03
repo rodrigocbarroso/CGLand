@@ -29,7 +29,7 @@ CCamera Camera;
 
 float posCameraX,posCameraY,posCameraZ;
 float pitch, yaw, walk;
-Ground g1 = *new Ground(15,12,15,80,20);
+Ground g1 = *new Ground(15,12,15,80,20, 15, 3, 2);
 Zebra z = *new Zebra(10.5,6.5,5.5,10);
 void *walls;
 int wallsLength = 0;
@@ -50,8 +50,8 @@ void init(void)
     walk = -10.0;
     //carrega modelos
 
-    zeb = Modelo::carregarObj("OBJs/ZEBRA.OBJ","OBJs/ZEBRA_Fotor.bmp");
-    grassMdl = Modelo::carregarObj("OBJs/grass.obj","OBJs/grass.bmp");
+    zeb = Modelo::carregarObj("OBJs/ZEBRA.OBJ");
+    grassMdl = Modelo::carregarObj("OBJs/grass.obj");
 
     
     g1.generateIsle();

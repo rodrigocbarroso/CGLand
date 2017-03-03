@@ -15,12 +15,15 @@
 
 
 //Construtor
-Ground::Ground(int x, int y, int z, int g, int l) {
+Ground::Ground(int x, int y, int z, int g, int l, int grass, int zebra, int lion) {
     sizeX = x;
     sizeY = y;
     sizeZ = z;
     groundP = g;
     lakeP = l;
+    qtGrass = grass;
+    qtLion = lion;
+    qtZebra = zebra;
     walls.reserve(size);
     gridIsle[x][y];
     
@@ -58,6 +61,13 @@ void Ground::generateIsle() {
     int i = 0;
     int p = 0;
     // std::vector<Ground*> grounds;
+    /* Criação do grid com os objetos
+     * 0 - Grama
+     * 1 - Agua
+     * 2 - Planta
+     * 3 - Zebra
+     * 4 - Leao
+     * */
     for (i=0;i<sizeX;i+=(sizeX-1)) {
         for (p=0;p<sizeZ;p++){
             gridIsle[i][p] = 1;
@@ -75,7 +85,7 @@ void Ground::generateIsle() {
         }
     }
     srand(time(NULL)); //gera a seed do rng
-    for (i = 0; i < qtdL; i++){
+    for (i = 0; i < qtdL; i++){ //Criacao dos lagos
         int x = rand()%sizeX; //coordenada aleatoria x
         int y = rand()%sizeZ; //coordenada aleatoria y
         if (gridIsle[x][y] == 1) {
@@ -83,26 +93,70 @@ void Ground::generateIsle() {
             continue;
         }
         else {
-            gridIsle[x][y] = 1; //ocupa a coordenada com um obstaculo
+            gridIsle[x][y] = 1; //ocupa a coordenada com um lago
+        }
+    }
+    
+    for (i = 0; i < qtGrass; i++){ //Criacao das plantas
+        int x = rand()%sizeX; //coordenada aleatoria x
+        int y = rand()%sizeZ; //coordenada aleatoria y
+        if (gridIsle[x][y] == 1) {
+            i -= 1;
+            continue;
+        }
+        else {
+            gridIsle[x][y] = 2; //ocupa a coordenada com uma planta
+        }
+    }
+    
+    for (i = 0; i < qtZebra; i++){ //Criacao das zebras
+        int x = rand()%sizeX; //coordenada aleatoria x
+        int y = rand()%sizeZ; //coordenada aleatoria y
+        if ((gridIsle[x][y] == 1) || (gridIsle[x][y] == 2)) {
+            i -= 1;
+            continue;
+        }
+        else {
+            gridIsle[x][y] = 3; //ocupa a coordenada com uma zebra
+        }
+    }
+    
+    for (i = 0; i < qtLion; i++){ //Criacao dos leoes
+        int x = rand()%sizeX; //coordenada aleatoria x
+        int y = rand()%sizeZ; //coordenada aleatoria y
+        if ((gridIsle[x][y] == 1) || (gridIsle[x][y] == 2) || (gridIsle[x][y] == 3)) {
+            i -= 1;
+            continue;
+        }
+        else {
+            gridIsle[x][y] = 4; //ocupa a coordenada com um leao
         }
     }
     
     //Posicionar as walls----------------------------------------
     for (p = 0; p < sizeZ; p++) {
         for (int i = 0; i < sizeX; i++) {
-            if (gridIsle[i][p] == 1) {
-                Wall aux;
-                aux.posX = i + 0.5;
-                aux.posY = p + 0.5;
-                walls.push_back(aux);
-                wallsIndex++;
-            } else {
-                Grass aux(10);
-                aux.posX = i + 0.5;
-                aux.posY = p + 0.5;
-                grasses.push_back(aux);
-                grassesLength++;
-            }
+            switch (gridIsle[i][p]) {
+                case 1: {
+					Wall aux;
+					aux.posX = i + 0.5;
+					aux.posY = p + 0.5;
+					walls.push_back(aux);
+					wallsIndex++;
+					break;
+				}
+				case 2: {
+					Grass aux(10);
+					aux.posX = i + 0.5;
+					aux.posY = p + 0.5;
+					grasses.push_back(aux);
+					grassesLength++;
+					break;
+				}
+				case 3: {
+					
+				}
+			}
         }
     }
     wallsLength = wallsIndex;
@@ -147,12 +201,15 @@ void Ground::drawIsle() {
 
 }
 
-void Ground::setParams(int x, int y,int  z, int g,int  l) {
+void Ground::setParams(int x, int y,int  z, int g,int  l, int grass, int zebra, int lion) {
     sizeX = x;
     sizeY = y;
     sizeZ = z;
     groundP = g;
     lakeP = l;
+    qtGrass = grass;
+    qtLion = lion;
+    qtZebra = zebra;
     gridIsle[x][y];
 }
 
