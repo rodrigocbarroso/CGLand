@@ -8,8 +8,10 @@
 
 #include "Grass.hpp"
 
+
+
 Grass::Grass(int gR) {
-    growthRate = gR; //com base no input do usuario
+        growthRate = gR; //com base no input do usuario
 }
 
 void Grass::grow() {
@@ -18,4 +20,9 @@ void Grass::grow() {
 
 void Grass::shrink() {
     size = size - 25;
+}
+
+void Grass::display() {
+
+    
 }

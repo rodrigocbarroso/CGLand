@@ -10,13 +10,13 @@
 #include "Zebra.hpp"
 #include <math.h>
 #include <iostream>
-#include "carregadorObj.cpp"
+
 
 float spd = 0.25;
-float dirX = 0.1;
-float dirY = 0.1;
+float dirX = 1;
+float dirY = 0;
 int dir = 1; //direcao (1 a 4);
-Modelo* zeb; //ponteiro para o modelo
+
 
 
 Zebra::Zebra(float x, float y, float z, int mL) {
@@ -24,7 +24,7 @@ Zebra::Zebra(float x, float y, float z, int mL) {
     posX = x;
     posZ = z;
     massLoss = mL;
-    zeb = Modelo::carregarObj("OBJs/ZEBRA.OBJ","OBJs/ZEBRA_Fotor.bmp");
+    
     
 }
 
@@ -46,6 +46,8 @@ float distance2 (float x, float u) {
     return sqrt(calc);
 }
 
+
+
 //walk calcula o movimento e chama a funcao display
 void Zebra::walk(std::vector<Wall>& walls, int wallsLength, std::vector<Grass>& grasses, int grassesLength) {
     
@@ -65,6 +67,42 @@ void Zebra::walk(std::vector<Wall>& walls, int wallsLength, std::vector<Grass>& 
         
     }*/
     
+    for (int i = 0; i < wallsLength; i++) {
+        
+        //se a proxima posicao esta ocupada
+        if (((posX + dirX) == walls[i].posX) && ((posY + dirY) == walls[i].posY)) {
+            std::cout << "parede: X ";
+            std::cout << walls[i].posX;
+            std::cout << " Y : ";
+            std::cout << walls[i].posY;
+            if ((dirX == 1) && (dirY == 0)) {
+                dirX = 0;
+                dirY = 1;
+                rotation = 0.0;
+            } else if ((dirX == -1) && (dirY == 0)) {
+                dirX = 0;
+                dirY = -1;
+                rotation = 180.0;
+            } else if ((dirX == 0) && (dirY == 1)) {
+                dirX = -1;
+                dirY = 0;
+                rotation = -90.0;
+            } else if ((dirX == 0) && (dirY == -1)) {
+                dirX = 1;
+                dirY = 0;
+                rotation =  90.0;
+            }
+        }
+    }
+    
+    posX = posX + dirX;
+    posY = posY + dirY;
+    
+    std::cout << " X: ";
+    std::cout << posX;
+    std::cout << " Y: ";
+    std::cout << posY;
+    std::cout << std::endl;
     
     
     //checa colisao com GRAMA;
@@ -83,27 +121,13 @@ void Zebra::walk(std::vector<Wall>& walls, int wallsLength, std::vector<Grass>& 
         }
     }
     
-    for (int i = 0; i < wallsLength; i++) {
-        
-        float dist = distance(posX,posY,walls[i].posX,walls[i].posY);
-        std::cout << dist << std::endl;
-        std::cout << walls[i].posX << std::endl;
-        if ( distance(posX,posY,walls[i].posX,walls[i].posY) < 0.8)
-        {
-            if (dir <=3 ) {
-                dir = dir + 1;
-            } else {
-                dir = 1;
-            }
-            
-        }
-    }
+
     
     
     //por iteracao perde massa
     weight = weight - massLoss;
     
-    //movimento
+    /*/movimento
     switch (dir) {
         case 1:
             posX = posX + spd;
@@ -124,7 +148,7 @@ void Zebra::walk(std::vector<Wall>& walls, int wallsLength, std::vector<Grass>& 
         default:
             break;
     }
-    
+    */
 
     //exibir
     display();
@@ -146,14 +170,7 @@ void Zebra::display() {
     
     //glEnable(GL_LIGHTING);
     
-    
-    glMatrixMode(GL_MODELVIEW);
-    glPushMatrix();
-    glScalef(0.3,0.3,0.3);
-    glTranslatef(posX, 0.0, posY);
-    //glColor3f(1.0,0.0,0.0);
-    zeb->desenhar();
-    glPopMatrix();
+
     //glDisable(GL_LIGHTING);
 }
 

@@ -8,7 +8,7 @@
 
 
 
-
+#pragma once
 #ifndef Ground_hpp
 #define Ground_hpp
 #endif /* Ground_hpp */
@@ -25,7 +25,6 @@
 #endif
 #include "Wall.hpp"
 #include "Grass.hpp"
-
 
 
 class Ground {

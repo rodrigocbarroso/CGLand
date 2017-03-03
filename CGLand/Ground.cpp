@@ -14,7 +14,6 @@
 
 
 
-
 //Construtor
 Ground::Ground(int x, int y, int z, int g, int l) {
     sizeX = x;
@@ -24,6 +23,7 @@ Ground::Ground(int x, int y, int z, int g, int l) {
     lakeP = l;
     walls.reserve(size);
     gridIsle[x][y];
+    
     
     
 }
@@ -97,7 +97,11 @@ void Ground::generateIsle() {
                 walls.push_back(aux);
                 wallsIndex++;
             } else {
-                
+                Grass aux(10);
+                aux.posX = i + 0.5;
+                aux.posY = p + 0.5;
+                grasses.push_back(aux);
+                grassesLength++;
             }
         }
     }
@@ -110,6 +114,11 @@ void Ground::generateIsle() {
     grasses.push_back(test);
     
 }
+
+void drawGrass(int i, int p) {
+
+}
+
 
 //chamado sempre para desenhar a ilha
 void Ground::drawIsle() {
@@ -135,6 +144,7 @@ void Ground::drawIsle() {
             }
         }
     }
+
 }
 
 void Ground::setParams(int x, int y,int  z, int g,int  l) {
@@ -145,4 +155,5 @@ void Ground::setParams(int x, int y,int  z, int g,int  l) {
     lakeP = l;
     gridIsle[x][y];
 }
+
 

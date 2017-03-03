@@ -20,6 +20,7 @@
 #include "Ground.hpp"
 #include "camera.h"
 #include "Zebra.hpp"
+#include "carregadorObj.cpp"
 
 
 #define ShowUpvector
@@ -29,9 +30,12 @@ CCamera Camera;
 float posCameraX,posCameraY,posCameraZ;
 float pitch, yaw, walk;
 Ground g1 = *new Ground(15,12,15,80,20);
-Zebra z = *new Zebra(10.0,6.0,5.0,10);
+Zebra z = *new Zebra(10.5,6.5,5.5,10);
 void *walls;
 int wallsLength = 0;
+Modelo* zeb;
+Modelo* grassMdl;
+
 
 void init(void)
 {
@@ -44,6 +48,11 @@ void init(void)
     pitch = 0.0;
     yaw = 0.0;
     walk = -10.0;
+    //carrega modelos
+
+    zeb = Modelo::carregarObj("OBJs/ZEBRA.OBJ","OBJs/ZEBRA_Fotor.bmp");
+    grassMdl = Modelo::carregarObj("OBJs/grass.obj","OBJs/grass.bmp");
+
     
     g1.generateIsle();
     
@@ -139,6 +148,41 @@ void display(void)
     
     g1.drawIsle();
     z.walk(g1.walls, g1.wallsLength, g1.grasses, g1.grassesLength);
+    
+    //desenha zebra ------------
+    glBegin(GL_QUADS);
+    glColor3f(1.0, 0.1, 1.0);
+    glVertex3f(z.posX-0.5, 0.1, z.posY-0.5);
+    glVertex3f(z.posX-0.5, 0.1, z.posY+0.5);
+    glVertex3f(z.posX+0.5, 0.1, z.posY+0.5);
+    glVertex3f(z.posX+0.5, 0.1, z.posY-0.5);
+    glEnd();
+    glMatrixMode(GL_MODELVIEW);
+    glPushMatrix();
+    glTranslatef(z.posX, 0.0, z.posY);
+    glRotatef(z.rotation, 0.0, 1.0, 0.0);
+    glScalef(0.3,0.3,0.3);
+
+    //glColor3f(1.0,0.0,0.0);
+    zeb->desenhar();
+    glPopMatrix();
+    
+    //desenha gramas --------------
+    for (int i = 0; i < g1.grassesLength; i++) {
+        glMatrixMode(GL_MODELVIEW);
+        glPushMatrix();
+
+        glTranslatef(g1.grasses[i].posX, 0.0, g1.grasses[i].posY);
+        glScalef(0.2,0.2,0.2);
+        glColor3f(0.0,0.5,0.0);
+        grassMdl->desenhar();
+        grassMdl->desenharTextura();
+        glPopMatrix();
+    }
+    
+
+    
+    
     
     
 

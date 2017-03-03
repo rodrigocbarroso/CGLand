@@ -24,6 +24,7 @@ public:
     Grass(int growthRate);
     void grow(); //chamado por iteracao
     void shrink(); //chamado quando alguem come
+    void display();
 };
 
 

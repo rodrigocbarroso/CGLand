@@ -27,10 +27,12 @@
 
 
 class Zebra {
+public:
     float posX, posY, posZ;
     int weight = 500;
     int weightMAX = 1000;
     int massLoss = 1;
+    float rotation = 00.0;
     
 public:
     Zebra(float x, float y, float z, int massLoss);
