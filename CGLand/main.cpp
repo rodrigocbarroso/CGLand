@@ -49,11 +49,11 @@ void init(void)
     yaw = 0.0;
     walk = -10.0;
     //carrega modelos
-
+	
     zeb = Modelo::carregarObj("OBJs/ZEBRA.OBJ");
     grassMdl = Modelo::carregarObj("OBJs/grass.obj");
 
-    
+	
     g1.generateIsle();
     
     glEnable(GL_TEXTURE_2D);
@@ -64,7 +64,6 @@ void init(void)
     
 }
 
-// Testador de teclados
 void KeyDown(unsigned char key, int x, int y)
 {
 	switch (key) 
@@ -147,7 +146,7 @@ void display(void)
     glEnd();
     
     g1.drawIsle();
-    z.walk(g1.walls, g1.wallsLength, g1.grasses, g1.grassesLength);
+    //z.walk(g1.walls, g1.wallsLength, g1.grasses, g1.grassesLength);
     
     //desenha zebra ------------
     /*
@@ -173,6 +172,8 @@ void display(void)
         glMatrixMode(GL_MODELVIEW);
         glPushMatrix();
         glTranslatef(g1.zebras[i].posX, 0.0, g1.zebras[i].posY);
+        glRotatef(g1.zebras[i].rotation, 0.0, 1.0, 0.0);
+        g1.zebras[i].walk(g1.walls, g1.wallsLength, g1.grasses, g1.grassesLength);
         glScalef(0.3,0.3,0.3);
         glColor3f(1.0,0.1,1.0);
         zeb->desenhar();

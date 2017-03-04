@@ -13,9 +13,7 @@
 
 
 float spd = 0.25;
-float dirX = 1;
-float dirY = 0;
-int dir = 1; //direcao (1 a 4);
+
 
 
 
@@ -24,7 +22,9 @@ Zebra::Zebra(float x, float y, float z, int mL) {
     posX = x;
     posZ = z;
     massLoss = mL;
-    
+	float dirX = 1;
+	float dirY = 0;
+	int dir = 1; //direcao (1 a 4);
     
 }
 

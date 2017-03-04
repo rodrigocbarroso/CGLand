@@ -33,6 +33,9 @@ public:
     int weightMAX = 1000;
     int massLoss = 1;
     float rotation = 00.0;
+    float dirX = 1;
+	float dirY = 0;
+	int dir = 1; //direcao (1 a 4);
     
 public:
     Zebra(float x, float y, float z, int massLoss);
