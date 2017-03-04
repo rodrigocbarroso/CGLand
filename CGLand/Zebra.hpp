@@ -40,8 +40,8 @@ public:
     
 public:
     Zebra(float x, float y, float z, int massLoss);
-    void walk(std::vector<Wall>& walls,int wallsLength, std::vector<Grass>& grasses, int grassesLength); //sera chamada pelo main.
-    void lionWalk(std::vector<Zebra>& zebras, int zebrasLength, std::vector<Wall>& walls,int wallsLength );
+    void walk(std::vector<Wall>& walls,int wallsLength, std::vector<Grass>& grasses, int grassesLength, std::vector<Zebra>& zebras, int zebrasLength); //sera chamada pelo main.
+    void lionWalk(std::vector<Zebra>& zebras, int zebrasLength, std::vector<Wall>& walls,int wallsLength, std::vector<Zebra>& lions, int lionsLength );
     void display();
     void die();
     void eat();

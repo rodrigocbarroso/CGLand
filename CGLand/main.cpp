@@ -169,9 +169,10 @@ void display(void)
     for (int i = 0; i < g1.zebrasLength; i++) {
             glMatrixMode(GL_MODELVIEW);
             glPushMatrix();
+                    g1.zebras[i].walk(g1.walls, g1.wallsLength, g1.grasses, g1.grassesLength, g1.zebras,g1.zebrasLength);
             glTranslatef(g1.zebras[i].posX, 0.0, g1.zebras[i].posY);
             glRotatef(g1.zebras[i].rotation, 0.0, 1.0, 0.0);
-            g1.zebras[i].walk(g1.walls, g1.wallsLength, g1.grasses, g1.grassesLength);
+
             glScalef(0.3,0.3,0.3);
             glColor3f(1.0,1.0,1.0);
             glEnable(GL_TEXTURE_2D);
@@ -204,7 +205,7 @@ void display(void)
         glPushMatrix();
         glTranslatef(g1.lions[i].posX, 0.0, g1.lions[i].posY);
         glRotatef(g1.lions[i].rotation, 0.0, 1.0, 0.0);
-        g1.lions[i].lionWalk(g1.zebras, g1.zebrasLength, g1.walls, g1.wallsLength);
+        g1.lions[i].lionWalk(g1.zebras, g1.zebrasLength, g1.walls, g1.wallsLength, g1.lions,g1.lionsLength);
         glScalef(0.3,0.3,0.3);
         glColor3f(1.0,1.0,1.0);
         glEnable(GL_TEXTURE_2D);

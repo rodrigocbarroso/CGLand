@@ -9,6 +9,8 @@
 
 #include "Zebra.hpp"
 #include <math.h>
+#include <cstdlib>
+#include <ctime>
 #include <iostream>
 
 
@@ -49,54 +51,112 @@ float distance2 (float x, float u) {
 
 
 //walk calcula o movimento e chama a funcao display
-void Zebra::walk(std::vector<Wall>& walls, int wallsLength, std::vector<Grass>& grasses, int grassesLength) {
+void Zebra::walk(std::vector<Wall>& walls, int wallsLength, std::vector<Grass>& grasses, int grassesLength, std::vector<Zebra> &zebras, int zebrasLength) {
     
-    /*checa colisao com invisible walls (lakes e ocean)
-    for (int i = 0; i < wallsLength; i++) {
-        if ( distance2(posX,walls[i].posX) < 0.2) {
-            //std::cout << distance2(posX,walls[i].posX);
-            dirX = -dirX;
-        }
+    int randDir = rand()%10;
+    
+    switch (randDir) {
+        case 0:
+            dirX= 1;
+            dirY= 0;
+ 
+            break;
+        case 1:
+            dirX= 0;
+            dirY= 1;
 
-        if ( distance2(posY,walls[i].posY) < 0.2) {
-            //std::cout << distance2(posY,walls[i].posY);
-            dirY = -dirY;
-        }
+            break;
+        case 2:
+            dirX= -1;
+            dirY= 0;
+  
+            break;
+        case 3:
+            dirX= 0;
+            dirY= -1;
+         
+            break;
+        case 4:
+            dirX= 1;
+            dirY= 0;
+       
+            break;
+        case 5:
+            dirX= 0;
+            dirY= -1;
         
-    }*/
+            break;
+        case 6:
+            dirX= 1;
+            dirY= 0;
+        
+            break;
+        case 7:
+            dirX= -1;
+            dirY= 0;
+          
+            break;
+        case 8:
+            dirX= 0;
+            dirY= 1;
+            
+            break;
+        case 9:
+            dirX= 0;
+            dirY= -1;
+           
+            break;
+        case 10:
+            dirX= 0;
+            dirY= 1;
+          
+            break;
+        default:
+            dirX= -1;
+            dirY= 0;
+          
+            break;
+    }
     
+    
+    //colisao com walls
     for (int i = 0; i < wallsLength; i++) {
-        
         //se a proxima posicao esta ocupada
         if (((posX + dirX) == walls[i].posX) && ((posY + dirY) == walls[i].posY)) {
-            /* std::cout << "parede: X ";
-            std::cout << walls[i].posX;
-            std::cout << " Y : ";
-            std::cout << walls[i].posY; */
-            if ((dirX == 1) && (dirY == 0)) {
-                dirX = 0;
-                dirY = 1;
-                rotation = 0.0;
-            } else if ((dirX == -1) && (dirY == 0)) {
-                dirX = 0;
-                dirY = -1;
-                rotation = 180.0;
-            } else if ((dirX == 0) && (dirY == 1)) {
-                dirX = -1;
-                dirY = 0;
-                rotation = -90.0;
-            } else if ((dirX == 0) && (dirY == -1)) {
-                dirX = 1;
-                dirY = 0;
-                rotation =  90.0;
-            }
+            dirX = 0;
+            dirY = 0;
         }
     }
     
+    //colisao com ZEBRAS
+    for (int i = 0; i < zebrasLength; i++) {
+        //se a proxima posicao esta ocupada
+        if (((posX + dirX) == zebras[i].posX) && ((posY + dirY) == zebras[i].posY)) {
+            dirX = 0;
+            dirY = 0;
+        }
+    }
+    
+    
     if (dead == false) {
+        //gira antes de se mover, se aplicavel.
+        if (dirX == 0) {
+            if (dirY == 1) {
+                rotation = -90.0;
+            }
+            if (dirY == -1){
+                rotation = 90.0;
+            }
+        } else {
+            if (dirX == 1) {
+                rotation = 0.0;
+            }
+            if (dirX == -1){
+                rotation = 180.0;
+            }
+        }
         posX = posX + dirX;
         posY = posY + dirY;
-        
     }
 
     /*std::cout << " X: ";
@@ -122,29 +182,7 @@ void Zebra::walk(std::vector<Wall>& walls, int wallsLength, std::vector<Grass>& 
     
     //por iteracao perde massa
     weight = weight - massLoss;
-    
-    /*/movimento
-    switch (dir) {
-        case 1:
-            posX = posX + spd;
-            posY = posY + 0;
-            break;
-        case 2:
-            posX = posX + 0;
-            posY = posY + spd;
-            break;
-        case 3:
-            posX = posX + -spd;
-            posY = posY + 0;
-            break;
-        case 4:
-            posX = posX + 0;
-            posY = posY + -spd;
-            break;
-        default:
-            break;
-    }
-    */
+
 
 
     
@@ -152,36 +190,81 @@ void Zebra::walk(std::vector<Wall>& walls, int wallsLength, std::vector<Grass>& 
 
 
 //se a zebra eh uma leao, entao ela anda como um leao
-void Zebra::lionWalk(std::vector<Zebra> &zebras, int zebrasLength, std::vector<Wall> &walls, int wallsLength) {
+void Zebra::lionWalk(std::vector<Zebra> &zebras, int zebrasLength, std::vector<Wall> &walls, int wallsLength, std::vector<Zebra>& lions, int lionsLength) {
     
     
+    int randDir = rand()%10;
+    
+    switch (randDir) {
+        case 0:
+            dirX= 1;
+            dirY= 0;
+            break;
+        case 1:
+            dirX= 0;
+            dirY= 1;
+            break;
+        case 2:
+            dirX= -1;
+            dirY= 0;
+            break;
+        case 3:
+            dirX= 0;
+            dirY= -1;
+            break;
+        case 4:
+            dirX= 1;
+            dirY= 0;
+            break;
+        case 5:
+            dirX= 0;
+            dirY= -1;
+            break;
+        case 6:
+            dirX= 1;
+            dirY= 0;
+            break;
+        case 7:
+            dirX= -1;
+            dirY= 0;
+            break;
+        case 8:
+            dirX= 0;
+            dirY= 1;
+            break;
+        case 9:
+            dirX= 0;
+            dirY= -1;
+            break;
+        case 10:
+            dirX= 0;
+            dirY= 1;
+            break;
+        default:
+            dirX= -1;
+            dirY= 0;
+            break;
+    }
+    
+    
+    //colisao com walls
     for (int i = 0; i < wallsLength; i++) {
-        
         //se a proxima posicao esta ocupada
         if (((posX + dirX) == walls[i].posX) && ((posY + dirY) == walls[i].posY)) {
-            /* std::cout << "parede: X ";
-             std::cout << walls[i].posX;
-             std::cout << " Y : ";
-             std::cout << walls[i].posY; */
-            if ((dirX == 1) && (dirY == 0)) {
-                dirX = 0;
-                dirY = 1;
-                rotation = 0.0;
-            } else if ((dirX == -1) && (dirY == 0)) {
-                dirX = 0;
-                dirY = -1;
-                rotation = 180.0;
-            } else if ((dirX == 0) && (dirY == 1)) {
-                dirX = -1;
-                dirY = 0;
-                rotation = -90.0;
-            } else if ((dirX == 0) && (dirY == -1)) {
-                dirX = 1;
-                dirY = 0;
-                rotation =  90.0;
-            }
+            dirX = 0;
+            dirY = 0;
         }
     }
+    
+    //colisao com leoes
+    for (int i = 0; i < lionsLength; i++) {
+        //se a proxima posicao esta ocupada
+        if (((posX + dirX) == lions[i].posX) && ((posY + dirY) == lions[i].posY)) {
+            dirX = 0;
+            dirY = 0;
+        }
+    }
+    
     
     posX = posX + dirX;
     posY = posY + dirY;
