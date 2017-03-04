@@ -48,10 +48,7 @@ void init(void)
     pitch = 0.0;
     yaw = 0.0;
     walk = -10.0;
-    //carrega modelos
-	
-    zeb = Modelo::carregarObj("OBJs/ZEBRA.OBJ");
-    grassMdl = Modelo::carregarObj("OBJs/grass.obj");
+    
 
 	
     g1.generateIsle();
@@ -175,7 +172,7 @@ void display(void)
         glRotatef(g1.zebras[i].rotation, 0.0, 1.0, 0.0);
         g1.zebras[i].walk(g1.walls, g1.wallsLength, g1.grasses, g1.grassesLength);
         glScalef(0.3,0.3,0.3);
-        glColor3f(1.0,0.1,1.0);
+        glColor3f(1.0,1.0,1.0);
         zeb->desenhar();
         glPopMatrix();
     }
@@ -226,11 +223,19 @@ int main(int argc, char** argv)
     
     init ();
     
+    //carrega modelos
+	
+    zeb = Modelo::carregarObj((char*)"OBJs/ZEBRA.OBJ", "OBJs/leao.bmp");
+   
+    grassMdl = Modelo::carregarObj((char*)"OBJs/grass.obj",(char*)"OBJs/folhas.bmp");
+    
     glutDisplayFunc(display);
     glutKeyboardFunc(KeyDown);
     glutReshapeFunc(reshape);
     
     glutMainLoop();
-    
+
+	delete zeb;
+	delete grassMdl;
     return 0;
 }
