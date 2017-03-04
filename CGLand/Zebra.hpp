@@ -36,10 +36,12 @@ public:
     float dirX = 1;
 	float dirY = 0;
 	int dir = 1; //direcao (1 a 4);
+    bool dead = false;
     
 public:
     Zebra(float x, float y, float z, int massLoss);
     void walk(std::vector<Wall>& walls,int wallsLength, std::vector<Grass>& grasses, int grassesLength); //sera chamada pelo main.
+    void lionWalk(std::vector<Zebra>& zebras, int zebrasLength, std::vector<Wall>& walls,int wallsLength );
     void display();
     void die();
     void eat();

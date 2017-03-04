@@ -157,7 +157,14 @@ void Ground::generateIsle() {
 					Zebra aux((i+0.5), (p+0.5), 0 ,10);
 					zebras.push_back(aux);
 					zebrasLength++;
+                    break;
 				}
+                case 4: {
+                    Zebra aux((i+0.5), (p+0.5), 0 ,10);
+                    lions.push_back(aux);
+                    lionsLength++;
+                    break;
+                }
 			}
         }
     }

@@ -31,6 +31,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		E21BD3471E6B11E200ECBC15 /* PANTHER.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = PANTHER.bmp; sourceTree = "<group>"; };
 		E21F7D701E664CC6002B4D92 /* Grass.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Grass.cpp; sourceTree = "<group>"; };
 		E21F7D711E664CC6002B4D92 /* Grass.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Grass.hpp; sourceTree = "<group>"; };
 		E21F7D721E664CC6002B4D92 /* Wall.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Wall.cpp; sourceTree = "<group>"; };
@@ -94,6 +95,7 @@
 				E21F7D701E664CC6002B4D92 /* Grass.cpp */,
 				E21F7D711E664CC6002B4D92 /* Grass.hpp */,
 				E21F7D721E664CC6002B4D92 /* Wall.cpp */,
+				E21BD3471E6B11E200ECBC15 /* PANTHER.bmp */,
 				E22EF5321E679FE5001E9DB9 /* Exemplo Obj.cpp */,
 				E21F7D731E664CC6002B4D92 /* Wall.hpp */,
 				E21F7D741E664CC6002B4D92 /* Zebra.cpp */,

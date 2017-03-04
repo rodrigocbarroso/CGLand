@@ -40,7 +40,8 @@ public:
     std::vector<Wall> walls; //esta matriz contem todas as walls que deverao ser evitadas pelos bixos
     std::vector<Grass> grasses; //contem as gramasss!
     std::vector<Zebra> zebras;
-    //std::vector<Lion> lions;
+    std::vector<Zebra> lions; //leoes também são zebras.
+    int lionsLength = 0;
     int grassesLength = 0;
     int zebrasLength = 0;
     int wallsLength = 0; //tamanho real da matriz

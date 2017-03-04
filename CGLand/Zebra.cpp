@@ -51,8 +51,6 @@ float distance2 (float x, float u) {
 //walk calcula o movimento e chama a funcao display
 void Zebra::walk(std::vector<Wall>& walls, int wallsLength, std::vector<Grass>& grasses, int grassesLength) {
     
-    
-    
     /*checa colisao com invisible walls (lakes e ocean)
     for (int i = 0; i < wallsLength; i++) {
         if ( distance2(posX,walls[i].posX) < 0.2) {
@@ -95,9 +93,12 @@ void Zebra::walk(std::vector<Wall>& walls, int wallsLength, std::vector<Grass>& 
         }
     }
     
-    posX = posX + dirX;
-    posY = posY + dirY;
-    
+    if (dead == false) {
+        posX = posX + dirX;
+        posY = posY + dirY;
+        
+    }
+
     /*std::cout << " X: ";
     std::cout << posX;
     std::cout << " Y: ";
@@ -109,7 +110,7 @@ void Zebra::walk(std::vector<Wall>& walls, int wallsLength, std::vector<Grass>& 
     for (int i = 0; i < wallsLength; i++) {
         
         if ((posX == grasses[i].posX) && (posY == grasses[i].posY)) {
-            //std::cout << "comeu";
+            //std::cout << "essa comeu grama";
             grasses[i].shrink();
             if (weight < weightMAX) {
                 weight = weight + 25; //equivalente a eat()
@@ -118,9 +119,6 @@ void Zebra::walk(std::vector<Wall>& walls, int wallsLength, std::vector<Grass>& 
             break;
         }
     }
-    
-
-    
     
     //por iteracao perde massa
     weight = weight - massLoss;
@@ -148,29 +146,93 @@ void Zebra::walk(std::vector<Wall>& walls, int wallsLength, std::vector<Grass>& 
     }
     */
 
-    //exibir
-    display();
+
     
 }
 
-void Zebra::display() {
-    
-    GLfloat mat_specular[] = { 1.0, 1.0, 1.0, 1.0 };
-    GLfloat mat_diffuse[] = { 1.0, 1.0, 1.0, 1.0 };
-    GLfloat mat_shininess[] = { 30.0 };
-    
-    //glPushAttrib (GL_LIGHTING);
-    
-    //atribui caracter√≠sticas ao material
-    glMaterialfv(GL_FRONT, GL_SPECULAR, mat_specular);
-    glMaterialfv(GL_FRONT, GL_SHININESS, mat_shininess);
-    glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, mat_diffuse);
-    
-    //glEnable(GL_LIGHTING);
-    
 
-    //glDisable(GL_LIGHTING);
+//se a zebra eh uma leao, entao ela anda como um leao
+void Zebra::lionWalk(std::vector<Zebra> &zebras, int zebrasLength, std::vector<Wall> &walls, int wallsLength) {
+    
+    
+    for (int i = 0; i < wallsLength; i++) {
+        
+        //se a proxima posicao esta ocupada
+        if (((posX + dirX) == walls[i].posX) && ((posY + dirY) == walls[i].posY)) {
+            /* std::cout << "parede: X ";
+             std::cout << walls[i].posX;
+             std::cout << " Y : ";
+             std::cout << walls[i].posY; */
+            if ((dirX == 1) && (dirY == 0)) {
+                dirX = 0;
+                dirY = 1;
+                rotation = 0.0;
+            } else if ((dirX == -1) && (dirY == 0)) {
+                dirX = 0;
+                dirY = -1;
+                rotation = 180.0;
+            } else if ((dirX == 0) && (dirY == 1)) {
+                dirX = -1;
+                dirY = 0;
+                rotation = -90.0;
+            } else if ((dirX == 0) && (dirY == -1)) {
+                dirX = 1;
+                dirY = 0;
+                rotation =  90.0;
+            }
+        }
+    }
+    
+    posX = posX + dirX;
+    posY = posY + dirY;
+    
+    
+    //checa colisao com ZEBRAS de verdade;
+    for (int i = 0; i < zebrasLength; i++) {
+        
+        if ((posX == zebras[i].posX) && (posY == zebras[i].posY)) {
+            //std::cout << "Comeu Zebra";
+            zebras[i].dead = true;
+            zebras[i].posX = -120;
+            zebras[i].posY = -120;
+            if (weight < weightMAX) {
+                weight = weight + 250; //equivalente a eat()
+            }
+            break;
+        }
+    }
+    
+    //por iteracao perde massa
+    weight = weight - massLoss;
+    
+    /*/movimento
+     switch (dir) {
+     case 1:
+     posX = posX + spd;
+     posY = posY + 0;
+     break;
+     case 2:
+     posX = posX + 0;
+     posY = posY + spd;
+     break;
+     case 3:
+     posX = posX + -spd;
+     posY = posY + 0;
+     break;
+     case 4:
+     posX = posX + 0;
+     posY = posY + -spd;
+     break;
+     default:
+     break;
+     }
+     */
+    
 }
+
+
+
+
 
 
 

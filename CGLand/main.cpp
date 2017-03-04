@@ -35,6 +35,7 @@ void *walls;
 int wallsLength = 0;
 Modelo* zeb;
 Modelo* grassMdl;
+Modelo* lion;
 
 
 void init(void)
@@ -166,15 +167,17 @@ void display(void)
     glPopMatrix();
     */
     for (int i = 0; i < g1.zebrasLength; i++) {
-        glMatrixMode(GL_MODELVIEW);
-        glPushMatrix();
-        glTranslatef(g1.zebras[i].posX, 0.0, g1.zebras[i].posY);
-        glRotatef(g1.zebras[i].rotation, 0.0, 1.0, 0.0);
-        g1.zebras[i].walk(g1.walls, g1.wallsLength, g1.grasses, g1.grassesLength);
-        glScalef(0.3,0.3,0.3);
-        glColor3f(1.0,1.0,1.0);
-        zeb->desenhar();
-        glPopMatrix();
+            glMatrixMode(GL_MODELVIEW);
+            glPushMatrix();
+            glTranslatef(g1.zebras[i].posX, 0.0, g1.zebras[i].posY);
+            glRotatef(g1.zebras[i].rotation, 0.0, 1.0, 0.0);
+            g1.zebras[i].walk(g1.walls, g1.wallsLength, g1.grasses, g1.grassesLength);
+            glScalef(0.3,0.3,0.3);
+            glColor3f(1.0,1.0,1.0);
+            zeb->desenhar();
+            glPopMatrix();
+        
+
     }
     
     //desenha gramas --------------
@@ -189,6 +192,21 @@ void display(void)
         g1.grasses[i].grow();
         glPopMatrix();
     }
+    
+    
+    //denhar leões ---------
+    for (int i = 0; i < g1.lionsLength; i++) {
+        glMatrixMode(GL_MODELVIEW);
+        glPushMatrix();
+        glTranslatef(g1.lions[i].posX, 0.0, g1.lions[i].posY);
+        glRotatef(g1.lions[i].rotation, 0.0, 1.0, 0.0);
+        g1.lions[i].lionWalk(g1.zebras, g1.zebrasLength, g1.walls, g1.wallsLength);
+        glScalef(0.3,0.3,0.3);
+        glColor3f(1.0,1.0,1.0);
+        lion->desenhar();
+        glPopMatrix();
+    }
+    
     
 
     
@@ -226,6 +244,7 @@ int main(int argc, char** argv)
     //carrega modelos
 	
     zeb = Modelo::carregarObj((char*)"OBJs/ZEBRA.OBJ", "OBJs/leao.bmp");
+    lion = Modelo::carregarObj((char*)"OBJs/PANTHER.OBJ", "PANTHER.bmp");
    
     grassMdl = Modelo::carregarObj((char*)"OBJs/grass.obj",(char*)"OBJs/folhas.bmp");
     
