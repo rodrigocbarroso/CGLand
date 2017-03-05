@@ -29,8 +29,8 @@
 class Zebra {
 public:
     float posX, posY, posZ;
-    int weight = 500;
-    int weightMAX = 1000;
+    int weight = 200;
+    int weightMAX = 500;
     int massLoss = 1;
     float rotation = 00.0;
     float dirX = 1;
@@ -40,9 +40,10 @@ public:
     
 public:
     Zebra(float x, float y, float z, int massLoss);
-    void walk(std::vector<Wall>& walls,int wallsLength, std::vector<Grass>& grasses, int grassesLength, std::vector<Zebra>& zebras, int zebrasLength); //sera chamada pelo main.
-    void lionWalk(std::vector<Zebra>& zebras, int zebrasLength, std::vector<Wall>& walls,int wallsLength, std::vector<Zebra>& lions, int lionsLength );
+    void walk(std::vector<Wall>& walls,int wallsLength, std::vector<Grass>& grasses, int grassesLength, std::vector<Zebra>& zebras, int zebrasLength, std::vector<Wall>& lakes,int lakesLength); //sera chamada pelo main.
+    void lionWalk(std::vector<Zebra>& zebras, int zebrasLength, std::vector<Wall>& walls,int wallsLength, std::vector<Zebra>& lions, int lionsLength, std::vector<Wall>& lakes,int lakesLength);
     void display();
+    void starve();
     void die();
     void eat();
 };

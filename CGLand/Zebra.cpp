@@ -50,10 +50,20 @@ float distance2 (float x, float u) {
     return sqrt(calc);
 }
 
+void Zebra::starve() {
+	if (weight > 0) {
+        weight = weight - massLoss;
+    }
+    else {
+		dead = true;
+		posX = -120;
+        posY = -120;
+	}
+}
 
 
 //walk calcula o movimento e chama a funcao display
-void Zebra::walk(std::vector<Wall>& walls, int wallsLength, std::vector<Grass>& grasses, int grassesLength, std::vector<Zebra> &zebras, int zebrasLength) {
+void Zebra::walk(std::vector<Wall>& walls, int wallsLength, std::vector<Grass>& grasses, int grassesLength, std::vector<Zebra> &zebras, int zebrasLength, std::vector<Wall>& lakes,int lakesLength) {
     
     int randDir = rand()%10;
     
@@ -121,6 +131,19 @@ void Zebra::walk(std::vector<Wall>& walls, int wallsLength, std::vector<Grass>& 
     }
     
     
+    //colisao com lagos
+    for (int i = 0; i < lakesLength; i++) {
+        //se a proxima posicao esta ocupada
+        if (((posX + dirX) == lakes[i].posX) && ((posY + dirY) == lakes[i].posY)) {
+            if (weight >= (weightMAX-50)) {
+				weight = weightMAX;
+			}
+			else {
+				weight = weight + 50;
+			}
+        }
+    }
+    
     //colisao com walls
     for (int i = 0; i < wallsLength; i++) {
         //se a proxima posicao esta ocupada
@@ -129,6 +152,7 @@ void Zebra::walk(std::vector<Wall>& walls, int wallsLength, std::vector<Grass>& 
             dirY = 0;
         }
     }
+    
     
     //colisao com ZEBRAS
     for (int i = 0; i < zebrasLength; i++) {
@@ -182,8 +206,8 @@ void Zebra::walk(std::vector<Wall>& walls, int wallsLength, std::vector<Grass>& 
         }
     }
     
-    //por iteracao perde massa
-    weight = weight - massLoss;
+    
+    
 
 
 
@@ -192,7 +216,7 @@ void Zebra::walk(std::vector<Wall>& walls, int wallsLength, std::vector<Grass>& 
 
 
 //se a zebra eh uma leao, entao ela anda como um leao
-void Zebra::lionWalk(std::vector<Zebra> &zebras, int zebrasLength, std::vector<Wall> &walls, int wallsLength, std::vector<Zebra>& lions, int lionsLength) {
+void Zebra::lionWalk(std::vector<Zebra> &zebras, int zebrasLength, std::vector<Wall> &walls, int wallsLength, std::vector<Zebra>& lions, int lionsLength, std::vector<Wall>& lakes,int lakesLength) {
     
     
     int randDir = rand()%10;
@@ -248,6 +272,17 @@ void Zebra::lionWalk(std::vector<Zebra> &zebras, int zebrasLength, std::vector<W
             break;
     }
     
+    for (int i = 0; i < lakesLength; i++) {
+        //se a proxima posicao esta ocupada
+        if (((posX + dirX) == lakes[i].posX) && ((posY + dirY) == lakes[i].posY)) {
+            if (weight >= (weightMAX-50)) {
+				weight = weightMAX;
+			}
+			else {
+				weight = weight + 50;
+			}
+        }
+    }
     
     //colisao com walls
     for (int i = 0; i < wallsLength; i++) {
@@ -257,6 +292,7 @@ void Zebra::lionWalk(std::vector<Zebra> &zebras, int zebrasLength, std::vector<W
             dirY = 0;
         }
     }
+    
     
     //colisao com leoes
     for (int i = 0; i < lionsLength; i++) {
@@ -285,8 +321,7 @@ void Zebra::lionWalk(std::vector<Zebra> &zebras, int zebrasLength, std::vector<W
         }
     }
     
-    //por iteracao perde massa
-    weight = weight - massLoss;
+    
     
 
     

@@ -38,6 +38,7 @@ public:
     int qtGrass, qtZebra, qtLion; //quantidades iniciais de plantas, zebras e leoes
     size_t size = 100;// porcentagem de lago
     std::vector<Wall> walls; //esta matriz contem todas as walls que deverao ser evitadas pelos bixos
+    std::vector<Wall> lakes;
     std::vector<Grass> grasses; //contem as gramasss!
     std::vector<Zebra> zebras;
     std::vector<Zebra> lions; //leoes também são zebras.
@@ -45,6 +46,7 @@ public:
     int grassesLength = 0;
     int zebrasLength = 0;
     int wallsLength = 0; //tamanho real da matriz
+    int lakesLength = 0;
     int gridIsle[100][100];
     int ZebraIt;
     int LeaoIt;

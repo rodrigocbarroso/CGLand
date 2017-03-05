@@ -60,7 +60,6 @@ Modelo* lion;
 
 void init(void)
 {
-    glClearColor (1.0, 1.0, 1.0, 0.0);
     //inicializa posição da câmera
     posCameraX = 0.3;
     posCameraY = 0.4;
@@ -71,11 +70,26 @@ void init(void)
     walk = -10.0;
     
     g1 = *new Ground(x,y,z,pIlha,pLagos, plantasQtd, zebrasQtd, leoesQtd, zebrasIt, leoesIt, plantasIt);
-    
-    
-	
     g1.generateIsle();
     
+    //coisas de openGL
+    glClearColor (1.0, 1.0, 1.0, 0.0);
+    glEnable(GL_DEPTH_TEST);
+    glShadeModel (GL_SMOOTH);
+    
+    glEnable(GL_LIGHTING);
+    
+    //LUZ
+    // no m√≠nimo 8 fontes podem ser utilizadas
+    //(iniciadas com cor preta)
+    // n√∫mero de fontes de luz afeta performance
+    
+    //LUZ 0
+    glEnable(GL_DEPTH_TEST);
+    glEnable(GL_LIGHTING);
+    glEnable(GL_COLOR_MATERIAL);
+    float vAmbientLightBright[4] = {1.0, 1.0,1.0, 1.0f};
+    glLightModelfv(GL_LIGHT_MODEL_AMBIENT, vAmbientLightBright);
     //glEnable(GL_TEXTURE_2D);
 	
     
@@ -136,7 +150,7 @@ void KeyDown(unsigned char key, int x, int y)
 
 void display(void)
 {
-    glClear (GL_COLOR_BUFFER_BIT);
+    glClear (GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
@@ -191,15 +205,16 @@ void display(void)
     for (int i = 0; i < g1.zebrasLength; i++) {
             glMatrixMode(GL_MODELVIEW);
             glPushMatrix();
-            g1.zebras[i].walk(g1.walls, g1.wallsLength, g1.grasses, g1.grassesLength, g1.zebras,g1.zebrasLength);
+            g1.zebras[i].walk(g1.walls, g1.wallsLength, g1.grasses, g1.grassesLength, g1.zebras,g1.zebrasLength, g1.lakes, g1.lakesLength);
             glTranslatef(g1.zebras[i].posX, 0.0, g1.zebras[i].posY);
             glRotatef(g1.zebras[i].rotation, 0.0, 1.0, 0.0);
 
-            glScalef(0.3,0.3,0.3);
+            glScalef(0.3*g1.zebras[i].weight*0.01,0.3*g1.zebras[i].weight*0.01,0.3*g1.zebras[i].weight*0.01);
             glColor3f(1.0,1.0,1.0);
             glEnable(GL_TEXTURE_2D);
             zeb->desenhar();
             glDisable(GL_TEXTURE_2D);
+            g1.zebras[i].starve();
             glPopMatrix();
         
 
@@ -227,12 +242,13 @@ void display(void)
         glPushMatrix();
         glTranslatef(g1.lions[i].posX, 0.0, g1.lions[i].posY);
         glRotatef(g1.lions[i].rotation, 0.0, 1.0, 0.0);
-        g1.lions[i].lionWalk(g1.zebras, g1.zebrasLength, g1.walls, g1.wallsLength, g1.lions,g1.lionsLength);
-        glScalef(0.3,0.3,0.3);
+        g1.lions[i].lionWalk(g1.zebras, g1.zebrasLength, g1.walls, g1.wallsLength, g1.lions,g1.lionsLength, g1.lakes, g1.lakesLength);
+        glScalef(0.3*g1.lions[i].weight*0.01,0.3*g1.lions[i].weight*0.01,0.3*g1.lions[i].weight*0.01);
         glColor3f(1.0,1.0,1.0);
         glEnable(GL_TEXTURE_2D);
         lion->desenhar();
         glDisable(GL_TEXTURE_2D);
+        g1.lions[i].starve();
         glPopMatrix();
     }
     

@@ -11,6 +11,8 @@
 #include "Ground.hpp"
 #include <cstdlib>
 #include <ctime>
+#include <iostream>
+#include <fstream>
 
 
 
@@ -45,7 +47,7 @@ void Ground::drawPatch(int x, int y, int color) {
      glBegin(GL_QUADS);
     if (color == 1) glColor3f(0.94, 0.92, 0.62);
     if (color == 2) glColor3f(0.0, 0.7, 0.0);
-    if (color == 3) glColor3f(0.0, 0.85, 0.0);
+    if (color == 3) glColor3f(0.1, 0.57, 0.90);
     if (color == 4) glColor3f(0.0, 0.0, 1.0);
      glVertex3f(x, 0.0, y);
      glVertex3f(x, 0.0, y+1);
@@ -67,20 +69,21 @@ void Ground::generateIsle() {
     int p = 0;
     // std::vector<Ground*> grounds;
     /* Criação do grid com os objetos
-     * 0 - Grama
+     * 0 - Areia
      * 1 - Agua
      * 2 - Planta
      * 3 - Zebra
      * 4 - Leao
+     * 5 - Oceano
      * */
     for (i=0;i<sizeX;i+=(sizeX-1)) {
         for (p=0;p<sizeZ;p++){
-            gridIsle[i][p] = 1;
+            gridIsle[i][p] = 5;
         }
     }
     for (p=0;p<sizeZ;p+=(sizeZ-1)) {
         for (i=1;i<sizeX;i++){
-            gridIsle[i][p] = 1;
+            gridIsle[i][p] = 5;
         }
     }
     
@@ -93,7 +96,7 @@ void Ground::generateIsle() {
     for (i = 0; i < qtdL; i++){ //Criacao dos lagos
         int x = rand()%sizeX; //coordenada aleatoria x
         int y = rand()%sizeZ; //coordenada aleatoria y
-        if (gridIsle[x][y] == 1) {
+        if ((gridIsle[x][y] == 1) || (gridIsle[x][y] == 5)) {
             i -= 1;
             continue;
         }
@@ -105,7 +108,7 @@ void Ground::generateIsle() {
     for (i = 0; i < qtGrass; i++){ //Criacao das plantas
         int x = rand()%sizeX; //coordenada aleatoria x
         int y = rand()%sizeZ; //coordenada aleatoria y
-        if (gridIsle[x][y] == 1) {
+        if ((gridIsle[x][y] == 1) || (gridIsle[x][y] == 5)) {
             i -= 1;
             continue;
         }
@@ -117,7 +120,7 @@ void Ground::generateIsle() {
     for (i = 0; i < qtZebra; i++){ //Criacao das zebras
         int x = rand()%sizeX; //coordenada aleatoria x
         int y = rand()%sizeZ; //coordenada aleatoria y
-        if ((gridIsle[x][y] == 1) || (gridIsle[x][y] == 2)) {
+        if ((gridIsle[x][y] == 1) || (gridIsle[x][y] == 2) || (gridIsle[x][y] == 5)) {
             i -= 1;
             continue;
         }
@@ -129,7 +132,7 @@ void Ground::generateIsle() {
     for (i = 0; i < qtLion; i++){ //Criacao dos leoes
         int x = rand()%sizeX; //coordenada aleatoria x
         int y = rand()%sizeZ; //coordenada aleatoria y
-        if ((gridIsle[x][y] == 1) || (gridIsle[x][y] == 2) || (gridIsle[x][y] == 3)) {
+        if ((gridIsle[x][y] == 1) || (gridIsle[x][y] == 2) || (gridIsle[x][y] == 3) || (gridIsle[x][y] == 5)) {
             i -= 1;
             continue;
         }
@@ -148,6 +151,8 @@ void Ground::generateIsle() {
 					aux.posY = p + 0.5;
 					walls.push_back(aux);
 					wallsIndex++;
+					lakes.push_back(aux);
+					lakesLength++;
 					break;
 				}
 				case 2: {
@@ -170,6 +175,14 @@ void Ground::generateIsle() {
                     lionsLength++;
                     break;
                 }
+                case 5: {
+					Wall aux;
+					aux.posX = i + 0.5;
+					aux.posY = p + 0.5;
+					walls.push_back(aux);
+					wallsIndex++;
+					break;
+				}
 			}
         }
     }
@@ -207,7 +220,10 @@ void Ground::drawIsle() {
         for (int i = 0; i < sizeX; i++) {
             if (gridIsle[i][p] == 1) {
                 drawPatch(i, p, 4); //adiciona lago   
-            } else {
+            } else if (gridIsle[i][p] == 5) { 
+				drawPatch(i, p, 3); //adiciona oceano   
+			}
+            else {
                 drawPatch(i, p, 1); //adiciona terra
             }
         }
