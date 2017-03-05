@@ -29,7 +29,7 @@
 class Zebra {
 public:
     float posX, posY, posZ;
-    int weight = 200;
+    int weight = 100;
     int weightMAX = 300;
     int massLoss = 1;
     float rotation = 00.0;

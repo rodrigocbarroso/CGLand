@@ -137,7 +137,7 @@ void Zebra::walk(std::vector<Wall>& walls, int wallsLength, std::vector<Grass>& 
         //se a proxima posicao esta ocupada
         if (((posX + dirX) == lakes[i].posX) && ((posY + dirY) == lakes[i].posY)) {
             if (weight >= (weightMAX-50)) {
-				weight = weightMAX;
+				//weight = weightMAX;
 			}
 			else {
 				weight = weight + 50;
@@ -197,14 +197,24 @@ void Zebra::walk(std::vector<Wall>& walls, int wallsLength, std::vector<Grass>& 
     for (int i = 0; i < wallsLength; i++) {
         
         if ((posX == grasses[i].posX) && (posY == grasses[i].posY)) {
-            //std::cout << "essa comeu grama";
+            //std::cout << "essa comeu grama" << std::endl;
             grasses[i].shrink();
             if (weight < weightMAX) {
                 weight = weight + 25; //equivalente a eat()
+            } else {
+  
             }
 
             break;
         }
+    }
+    
+    //checa se morre de fome
+    if (weight < 0) {
+        
+        dead = true;
+        posX = -120;
+        posY = -120;
     }
     
     
@@ -214,6 +224,8 @@ void Zebra::walk(std::vector<Wall>& walls, int wallsLength, std::vector<Grass>& 
 
     
 }
+
+
 
 
 //se a zebra eh uma leao, entao ela anda como um leao
@@ -341,7 +353,7 @@ void Zebra::lionWalk(std::vector<Zebra> &zebras, int zebrasLength, std::vector<W
 					zebras[i].posY = -120;
 					weight = weight*2;
 					if (weight >= weightMAX) {
-						weight = weightMAX;
+						//weight = weightMAX;
 					}
 				}
 			}
@@ -353,7 +365,20 @@ void Zebra::lionWalk(std::vector<Zebra> &zebras, int zebrasLength, std::vector<W
         }
     }
     
+    //checa se morre de fome
+    if (weight < 0) {
+        
+        dead = true;
+        posX = -120;
+        posY = -120;
+    }
+    
+    
 }
+
+
+
+
     
     
     

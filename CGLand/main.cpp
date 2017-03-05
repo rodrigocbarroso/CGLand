@@ -27,7 +27,7 @@
 
 #define ShowUpvector
 
-
+//variaveis do input.txt
 std::string cena;
 int x,y,z;
 std::string ilhas;
@@ -45,6 +45,8 @@ CCamera Camera;
 
 float posCameraX,posCameraY,posCameraZ;
 float pitch, yaw, walk;
+
+
 Ground g1 = *new Ground(x,y,z,pIlha,pLagos, plantasQtd, zebrasQtd, leoesQtd, zebrasIt, leoesIt, plantasIt);
 void *walls;
 int wallsLength = 0;
@@ -202,7 +204,58 @@ void display(void)
     zeb->desenhar();
     glPopMatrix();
     */
+    
+    //explode zebras e leoes
     for (int i = 0; i < g1.zebrasLength; i++) {
+        if (g1.zebras[i].weight >= g1.zebras[i].weightMAX) {
+
+            std::cout << "Zebra explodiu!" << std::endl;
+            //explodir em 4 zebras
+            if ( g1.zebras[i].weight >= g1.zebras[i].weightMAX + 24) {
+                Zebra auxa((g1.zebras[i].posX+1), (g1.zebras[i].posY), 0 ,10);
+                g1.zebras.push_back(auxa);
+                g1.zebrasLength++;
+            }
+            if ( g1.zebras[i].weight >= g1.zebras[i].weightMAX + 15) {
+                Zebra auxb((g1.zebras[i].posX-1), (g1.zebras[i].posY), 0 ,10);
+                g1.zebras.push_back(auxb);
+                g1.zebrasLength++;
+            }
+            if ( g1.zebras[i].weight >= g1.zebras[i].weightMAX + 10) {
+                Zebra auxc((g1.zebras[i].posX), (g1.zebras[i].posY+1), 0 ,10);
+                g1.zebras.push_back(auxc);
+                g1.zebrasLength++;
+            }
+            Zebra auxd((g1.zebras[i].posX), (g1.zebras[i].posY-1), 0 ,10);
+            g1.zebras.push_back(auxd);
+            g1.zebrasLength++;
+
+            g1.zebras[i].weight = 100;
+        }
+	
+    }
+    for (int i = 0; i < g1.lionsLength; i++) {
+        
+        if (g1.lions[i].weight >= g1.lions[i].weightMAX) {
+            std::cout << "Leao explodiu!" << std::endl;
+            Zebra aux((g1.lions[i].posX+1), (g1.lions[i].posY), 0 ,15);
+            g1.lions.push_back(aux);
+            g1.lionsLength++;
+            if (g1.lions[i].weight >= (g1.lions[i].weightMAX + 50)){
+                Zebra auxi((g1.lions[i].posX), (g1.lions[i].posY+1), 0 ,15);
+                g1.lions.push_back(auxi);
+                g1.lionsLength++;
+            }
+        }
+    }
+
+    
+    
+    
+    
+    for (int i = 0; i < g1.zebrasLength; i++) {
+        
+        
             glMatrixMode(GL_MODELVIEW);
             glPushMatrix();
             g1.zebras[i].walk(g1.walls, g1.wallsLength, g1.grasses, g1.grassesLength, g1.zebras,g1.zebrasLength, g1.lakes, g1.lakesLength);
