@@ -158,7 +158,10 @@ void display(void)
     glLoadIdentity();
     
     Camera.Render();
-    glTranslatef(-1.0,-1.5,-10.0); //Posicionamento inicial
+    //Posicionamento inicial
+    glRotatef(90.0, 0.0, 1.0, 0.0);
+    glRotatef(15.0, 0.0, 0.0, 1.0);
+    glTranslatef(15.0,-5.0,-(g1.sizeZ)/2);
     glPopMatrix();
     
     //glColor3f (0.7, 0.7, 1.0);
@@ -262,7 +265,7 @@ void display(void)
             glTranslatef(g1.zebras[i].posX, 0.0, g1.zebras[i].posY);
             glRotatef(g1.zebras[i].rotation, 0.0, 1.0, 0.0);
 
-            glScalef(0.3*g1.zebras[i].weight*0.01,0.3*g1.zebras[i].weight*0.01,0.3*g1.zebras[i].weight*0.01);
+            glScalef(0.2*g1.zebras[i].weight*0.01,0.2*g1.zebras[i].weight*0.01,0.2*g1.zebras[i].weight*0.01);
             glColor3f(1.0,1.0,1.0);
             glEnable(GL_TEXTURE_2D);
             zeb->desenhar();
