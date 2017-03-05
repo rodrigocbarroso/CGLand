@@ -9,6 +9,7 @@
 
 #include "Zebra.hpp"
 #include <math.h>
+#include <time.h>
 #include <cstdlib>
 #include <ctime>
 #include <iostream>
@@ -311,21 +312,55 @@ void Zebra::lionWalk(std::vector<Zebra> &zebras, int zebrasLength, std::vector<W
         
         if ((posX == zebras[i].posX) && (posY == zebras[i].posY)) {
             //std::cout << "Comeu Zebra";
-            zebras[i].dead = true;
-            zebras[i].posX = -120;
-            zebras[i].posY = -120;
-            if (weight < weightMAX) {
-                weight = weight + 250; //equivalente a eat()
-            }
+            
+            
+            if (weight > zebras[i].weight) {
+				weight = weight + zebras[i].weight;
+				zebras[i].dead = true;
+				zebras[i].posX = -120;
+				zebras[i].posY = -120;
+				
+				if (weight >= weightMAX) {
+					weight = weightMAX;
+				}
+			}
+			
+			else {
+				double chanceZebra = 100*(weight/(zebras[i].weight));
+				srand(time(NULL));
+				double deathNumber = rand()%100 + 1;
+				if (chanceZebra >= deathNumber) {
+					weight = weight - (zebras[i].weight - weight);
+					glClearColor (0.0, 0.0, 0.0, 0.0);
+					if (weight <= 0) {
+						starve();
+					}
+				}
+				else {
+					zebras[i].dead = true;
+					zebras[i].posX = -120;
+					zebras[i].posY = -120;
+					weight = weight*2;
+					if (weight >= weightMAX) {
+						weight = weightMAX;
+					}
+				}
+			}
+			
+            //if (weight < weightMAX) {
+            //    weight = weight + zebras[i].weight; //equivalente a eat()
+            //}
             break;
         }
     }
+    
+}
     
     
     
 
     
-}
+
 
 
 
