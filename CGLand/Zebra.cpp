@@ -331,7 +331,6 @@ void Zebra::lionWalk(std::vector<Zebra> &zebras, int zebrasLength, std::vector<W
 				double deathNumber = rand()%100 + 1;
 				if (chanceZebra >= deathNumber) {
 					weight = weight - (zebras[i].weight - weight);
-					glClearColor (0.0, 0.0, 0.0, 0.0);
 					if (weight <= 0) {
 						starve();
 					}
