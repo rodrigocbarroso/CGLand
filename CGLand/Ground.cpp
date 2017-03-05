@@ -15,7 +15,7 @@
 
 
 //Construtor
-Ground::Ground(int x, int y, int z, int g, int l, int grass, int zebra, int lion) {
+Ground::Ground(int x, int y, int z, int g, int l, int grass, int zebra, int lion, int ZIt, int LIt, int PIt) {
     sizeX = x;
     sizeY = y;
     sizeZ = z;
@@ -26,6 +26,11 @@ Ground::Ground(int x, int y, int z, int g, int l, int grass, int zebra, int lion
     qtZebra = zebra;
     walls.reserve(size);
     gridIsle[x][y];
+    PlantaIt = PIt; //perdas de massa por iteracao
+    LeaoIt = LIt;
+    ZebraIt = ZIt;
+    
+    
     
     
     
@@ -38,7 +43,7 @@ void Ground::drawPatch(int x, int y, int color) {
     
     // color = 1 -> green1 2-> green 2 -> 3 : green 3 4: lake?
      glBegin(GL_QUADS);
-    if (color == 1) glColor3f(0.0, 1.0, 0.0);
+    if (color == 1) glColor3f(0.94, 0.92, 0.62);
     if (color == 2) glColor3f(0.0, 0.7, 0.0);
     if (color == 3) glColor3f(0.0, 0.85, 0.0);
     if (color == 4) glColor3f(0.0, 0.0, 1.0);
@@ -146,7 +151,7 @@ void Ground::generateIsle() {
 					break;
 				}
 				case 2: {
-					Grass aux(10);
+					Grass aux(PlantaIt);
 					aux.posX = i + 0.5;
 					aux.posY = p + 0.5;
 					grasses.push_back(aux);
@@ -154,13 +159,13 @@ void Ground::generateIsle() {
 					break;
 				}
 				case 3: {
-					Zebra aux((i+0.5), (p+0.5), 0 ,10);
+					Zebra aux((i+0.5), (p+0.5), 0 ,ZebraIt);
 					zebras.push_back(aux);
 					zebrasLength++;
                     break;
 				}
                 case 4: {
-                    Zebra aux((i+0.5), (p+0.5), 0 ,10);
+                    Zebra aux((i+0.5), (p+0.5), 0 ,LeaoIt);
                     lions.push_back(aux);
                     lionsLength++;
                     break;

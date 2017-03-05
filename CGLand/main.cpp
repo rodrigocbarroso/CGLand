@@ -21,21 +21,41 @@
 #include "camera.h"
 //#include "Zebra.hpp"
 #include "carregadorObj.cpp"
+#include <iostream>
+#include <fstream>
 
 
 #define ShowUpvector
+
+
+std::string cena;
+int x,y,z;
+std::string ilhas;
+int pIlha;
+std::string lagos;
+int pLagos;
+std::string leoes;
+int leoesQtd, leoesIt;
+std::string zebras;
+int zebrasQtd, zebrasIt;
+std::string plantas;
+int plantasQtd, plantasIt;
 
 CCamera Camera;
 
 float posCameraX,posCameraY,posCameraZ;
 float pitch, yaw, walk;
-Ground g1 = *new Ground(15,12,15,80,20, 15, 3, 2);
-Zebra z = *new Zebra(10.5,6.5,5.5,10);
+Ground g1 = *new Ground(x,y,z,pIlha,pLagos, plantasQtd, zebrasQtd, leoesQtd, zebrasIt, leoesIt, plantasIt);
 void *walls;
 int wallsLength = 0;
 Modelo* zeb;
 Modelo* grassMdl;
 Modelo* lion;
+
+
+
+
+
 
 
 void init(void)
@@ -50,7 +70,9 @@ void init(void)
     yaw = 0.0;
     walk = -10.0;
     
-
+    g1 = *new Ground(x,y,z,pIlha,pLagos, plantasQtd, zebrasQtd, leoesQtd, zebrasIt, leoesIt, plantasIt);
+    
+    
 	
     g1.generateIsle();
     
@@ -169,7 +191,7 @@ void display(void)
     for (int i = 0; i < g1.zebrasLength; i++) {
             glMatrixMode(GL_MODELVIEW);
             glPushMatrix();
-                    g1.zebras[i].walk(g1.walls, g1.wallsLength, g1.grasses, g1.grassesLength, g1.zebras,g1.zebrasLength);
+            g1.zebras[i].walk(g1.walls, g1.wallsLength, g1.grasses, g1.grassesLength, g1.zebras,g1.zebrasLength);
             glTranslatef(g1.zebras[i].posX, 0.0, g1.zebras[i].posY);
             glRotatef(g1.zebras[i].rotation, 0.0, 1.0, 0.0);
 
@@ -189,11 +211,11 @@ void display(void)
         glPushMatrix();
         glTranslatef(g1.grasses[i].posX, 0.0, g1.grasses[i].posY);
         glScalef(0.2*g1.grasses[i].size*0.001,0.2*g1.grasses[i].size*0.001,0.2*g1.grasses[i].size*0.001);
-        glColor3f(0.0,1.0,0.0);
-        glEnable(GL_TEXTURE_2D);
+        glColor3f(0.0,0.5,0.0);
+        // glEnable(GL_TEXTURE_2D);
         grassMdl->desenhar();
         //grassMdl->desenharTextura();
-        glDisable(GL_TEXTURE_2D);
+        //glDisable(GL_TEXTURE_2D);
         g1.grasses[i].grow();
         glPopMatrix();
     }
@@ -240,20 +262,30 @@ void reshape(int w, int h)
 
 int main(int argc, char** argv)
 {
+    
+    //leitura do arquivo de input
+    std::ifstream file( "input.txt", std::ios::in );
+    if( !file ) std::cerr << "Cant open " << std::endl;
+    while( file >> cena >> x >> y >> z >> ilhas >> pIlha >> lagos >> pLagos >> leoes >> leoesQtd >> leoesIt >> zebras >> zebrasQtd >> zebrasIt >> plantas >> plantasQtd >> plantasIt)
+    {
+    }
+    file.close();
+    
+
+
     glutInit(&argc, argv);
     glutInitDisplayMode (GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
-    glutInitWindowSize (500, 500);
+    glutInitWindowSize (900, 900);
     glutInitWindowPosition (100, 100);
     glutCreateWindow ("CGLand");
     
     init ();
     
     //carrega modelos
-	
-    zeb = Modelo::carregarObj((char*)"OBJs/ZEBRA.OBJ", "OBJs/leao.bmp");
+    
+    zeb = Modelo::carregarObj((char*)"OBJs/ZEBRA.OBJ", "OBJs/ZEBRA.bmp");
     lion = Modelo::carregarObj((char*)"OBJs/PANTHER.OBJ", "OBJs/leao.bmp");
-   
-    grassMdl = Modelo::carregarObj((char*)"OBJs/grass.obj",(char*)"OBJs/leao.bmp");
+    grassMdl = Modelo::carregarObj((char*)"OBJs/grass.obj",(char*)"OBJs/grass.bmp");
     
     glutDisplayFunc(display);
     glutKeyboardFunc(KeyDown);

@@ -1,0 +1,6 @@
+Cena 15 12 15
+Ilhas 80
+Lagos 20
+Lees 2 15
+Zebras 3 15
+Plantas 25 15

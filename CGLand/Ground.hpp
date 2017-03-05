@@ -46,11 +46,14 @@ public:
     int zebrasLength = 0;
     int wallsLength = 0; //tamanho real da matriz
     int gridIsle[100][100];
+    int ZebraIt;
+    int LeaoIt;
+    int PlantaIt;
     
     // funcao chamada pelo main() para desenhar a ilha
     
     public:
-    Ground(int x, int y, int z, int g, int l, int grass, int zebra, int lion);
+    Ground(int x, int y, int z, int g, int l, int grass, int zebra, int lion, int ZIt, int LIt, int PIt);
     Ground();
     void setParams(int x, int y, int z, int g, int l, int grass, int zebra, int lion);
     void drawPatch(int x, int y, int color);

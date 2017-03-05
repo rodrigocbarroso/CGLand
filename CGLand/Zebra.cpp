@@ -12,14 +12,14 @@
 #include <cstdlib>
 #include <ctime>
 #include <iostream>
+#include <fstream>
+
 
 
 float spd = 0.25;
 
-
-
-
 Zebra::Zebra(float x, float y, float z, int mL) {
+    
     posY = y;
     posX = x;
     posZ = z;
@@ -27,6 +27,8 @@ Zebra::Zebra(float x, float y, float z, int mL) {
 	float dirX = 1;
 	float dirY = 0;
 	int dir = 1; //direcao (1 a 4);
+    
+    
     
 }
 
@@ -265,10 +267,8 @@ void Zebra::lionWalk(std::vector<Zebra> &zebras, int zebrasLength, std::vector<W
         }
     }
     
-    
     posX = posX + dirX;
     posY = posY + dirY;
-    
     
     //checa colisao com ZEBRAS de verdade;
     for (int i = 0; i < zebrasLength; i++) {
@@ -288,28 +288,7 @@ void Zebra::lionWalk(std::vector<Zebra> &zebras, int zebrasLength, std::vector<W
     //por iteracao perde massa
     weight = weight - massLoss;
     
-    /*/movimento
-     switch (dir) {
-     case 1:
-     posX = posX + spd;
-     posY = posY + 0;
-     break;
-     case 2:
-     posX = posX + 0;
-     posY = posY + spd;
-     break;
-     case 3:
-     posX = posX + -spd;
-     posY = posY + 0;
-     break;
-     case 4:
-     posX = posX + 0;
-     posY = posY + -spd;
-     break;
-     default:
-     break;
-     }
-     */
+
     
 }
 
