@@ -93,7 +93,12 @@ void init(void)
     float vAmbientLightBright[4] = {0.8, 0.8, 0.8, 1.0f};
     glLightModelfv(GL_LIGHT_MODEL_AMBIENT, vAmbientLightBright);
     
-    GLfloat light0_position[] = { 0.0, g1.sizeY, 0.0, 1.0 };
+    float sizeX = (float)g1.sizeX;
+    float sizeY = (float)g1.sizeY;
+    float sizeZ = (float)g1.sizeZ;
+    
+    
+    GLfloat light0_position[] = { 0.0, sizeY, 0.0, 1.0 };
     GLfloat light0_diffuse[] = { 1.0, 1.0, 0.2, 1.0 };
 	GLfloat light0_specular[] = { 1.0, 1.0, 0.2, 1.0 };
 	//GLfloat light0_ambient[] = { 0.7, 0.2, 0.2, 1.0 };
@@ -101,7 +106,7 @@ void init(void)
 	glLightfv(GL_LIGHT0, GL_DIFFUSE, light0_diffuse);
 	glLightfv(GL_LIGHT0, GL_SPECULAR, light0_specular);
 	
-	GLfloat light1_position[] = { g1.sizeX, g1.sizeY, -g1.sizeZ, 1.0 };
+	GLfloat light1_position[] = { sizeX, sizeY, -sizeZ, 1.0 };
 	glLightfv(GL_LIGHT1, GL_POSITION, light1_position);
 	glLightfv(GL_LIGHT1, GL_DIFFUSE, light0_diffuse);
 	glLightfv(GL_LIGHT1, GL_SPECULAR, light0_specular);

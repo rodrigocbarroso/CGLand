@@ -152,6 +152,12 @@ void Zebra::walk(std::vector<Wall>& walls, int wallsLength, std::vector<Grass>& 
             dirX = 0;
             dirY = 0;
         }
+        //se estiver na agua, morre.
+        if (((posX) == walls[i].posX) && ((posY) == walls[i].posY)) {
+            dead = true;
+            posX = -120;
+            posY = -120;
+        }
     }
     
     
@@ -169,17 +175,17 @@ void Zebra::walk(std::vector<Wall>& walls, int wallsLength, std::vector<Grass>& 
         //gira antes de se mover, se aplicavel.
         if (dirX == 0) {
             if (dirY == 1) {
-                rotation = -90.0;
+                rotation = -180.0;
             }
             if (dirY == -1){
-                rotation = 90.0;
+                rotation = 180.0;
             }
         } else {
             if (dirX == 1) {
-                rotation = 0.0;
+                rotation = 90.0;
             }
             if (dirX == -1){
-                rotation = 180.0;
+                rotation = -90.0;
             }
         }
         posX = posX + dirX;
@@ -304,6 +310,12 @@ void Zebra::lionWalk(std::vector<Zebra> &zebras, int zebrasLength, std::vector<W
             dirX = 0;
             dirY = 0;
         }
+        //se estiver na agua, morre.
+        if (((posX) == walls[i].posX) && ((posY) == walls[i].posY)) {
+            dead = true;
+            posX = -120;
+            posY = -120;
+        }
     }
     
     
@@ -315,10 +327,26 @@ void Zebra::lionWalk(std::vector<Zebra> &zebras, int zebrasLength, std::vector<W
             dirY = 0;
         }
     }
-    
+    //giro antes de se mover
+    if (dirX == 0) {
+        if (dirY == 1) {
+            rotation = -180.0;
+        }
+        if (dirY == -1){
+            rotation = 180.0;
+        }
+    } else {
+        if (dirX == 1) {
+            rotation = 90.0;
+        }
+        if (dirX == -1){
+            rotation = -90.0;
+        }
+    }
     posX = posX + dirX;
     posY = posY + dirY;
     
+
     //checa colisao com ZEBRAS de verdade;
     for (int i = 0; i < zebrasLength; i++) {
         
