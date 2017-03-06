@@ -90,14 +90,57 @@ void init(void)
     glEnable(GL_DEPTH_TEST);
     glEnable(GL_LIGHTING);
     glEnable(GL_COLOR_MATERIAL);
-    float vAmbientLightBright[4] = {1.0, 1.0,1.0, 1.0f};
+    float vAmbientLightBright[4] = {0.8, 0.8, 0.8, 1.0f};
     glLightModelfv(GL_LIGHT_MODEL_AMBIENT, vAmbientLightBright);
+    
+    GLfloat light0_position[] = { 0.0, g1.sizeY, 0.0, 1.0 };
+    GLfloat light0_diffuse[] = { 1.0, 1.0, 0.2, 1.0 };
+	GLfloat light0_specular[] = { 1.0, 1.0, 0.2, 1.0 };
+	//GLfloat light0_ambient[] = { 0.7, 0.2, 0.2, 1.0 };
+    glLightfv(GL_LIGHT0, GL_POSITION, light0_position);
+	glLightfv(GL_LIGHT0, GL_DIFFUSE, light0_diffuse);
+	glLightfv(GL_LIGHT0, GL_SPECULAR, light0_specular);
+	
+	GLfloat light1_position[] = { g1.sizeX, g1.sizeY, -g1.sizeZ, 1.0 };
+	glLightfv(GL_LIGHT1, GL_POSITION, light1_position);
+	glLightfv(GL_LIGHT1, GL_DIFFUSE, light0_diffuse);
+	glLightfv(GL_LIGHT1, GL_SPECULAR, light0_specular);
+	//glLightfv(GL_LIGHT0, GL_AMBIENT, light0_ambient);
+	glEnable(GL_LIGHT0);
+	glEnable(GL_LIGHT1);
     //glEnable(GL_TEXTURE_2D);
 	
     
     
    
     
+}
+
+void drawSun() {
+	//Desenho do sol
+    glPushAttrib (GL_LIGHTING_BIT);
+   
+	GLfloat mat_diffuse[] = { 1.0, 1.0, 0.0, 1.0 };
+	GLfloat mat_emission[] = { 1.0, 1.0, 0.0, 1.0 };
+          
+	//atribui características ao material
+	glMaterialfv(GL_FRONT, GL_DIFFUSE, mat_diffuse);
+	glMaterialfv(GL_FRONT, GL_EMISSION, mat_emission);
+ 
+	glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, mat_diffuse);
+    
+	glPushMatrix();
+	glTranslatef(g1.sizeX, g1.sizeY/2, g1.sizeZ); 
+	glScalef(15.0, 15.0, 15.0);
+   
+	glEnable(GL_LIGHTING);
+	// glColor3f (1.0, 1.0, 0.0);
+	glutSolidSphere(0.05,50,50);
+	glDisable(GL_LIGHTING);
+   
+	glPopAttrib();
+	glPopMatrix();
+	
 }
 
 void KeyDown(unsigned char key, int x, int y)
@@ -158,6 +201,7 @@ void display(void)
     glLoadIdentity();
     
     Camera.Render();
+    
     //Posicionamento inicial
     glRotatef(90.0, 0.0, 1.0, 0.0);
     glRotatef(15.0, 0.0, 0.0, 1.0);
@@ -183,7 +227,7 @@ void display(void)
     glVertex3f(0.0, 0.0, 0.0);
     glVertex3f(0.0, 0.0, 10.0);
     glEnd();
-    
+    drawSun();
     g1.drawIsle();
     //z.walk(g1.walls, g1.wallsLength, g1.grasses, g1.grassesLength);
     
