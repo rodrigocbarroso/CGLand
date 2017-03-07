@@ -46,7 +46,7 @@ CCamera Camera;
 float posCameraX,posCameraY,posCameraZ;
 float pitch, yaw, walk;
 
-
+//inicializacao de variaveis e ponteiros globais
 Ground g1 = *new Ground(x,y,z,pIlha,pLagos, plantasQtd, zebrasQtd, leoesQtd, zebrasIt, leoesIt, plantasIt);
 void *walls;
 int wallsLength = 0;
@@ -82,9 +82,7 @@ void init(void)
     glEnable(GL_LIGHTING);
     
     //LUZ
-    // no m√≠nimo 8 fontes podem ser utilizadas
-    //(iniciadas com cor preta)
-    // n√∫mero de fontes de luz afeta performance
+
     
     //LUZ 0
     glEnable(GL_DEPTH_TEST);
@@ -213,49 +211,13 @@ void display(void)
     glTranslatef(15.0,-5.0,-(g1.sizeZ)/2);
     glPopMatrix();
     
-    //glColor3f (0.7, 0.7, 1.0);
-    //glutWireTeapot(0.5);
-    //glutWireSphere(0.5,20,20);
+
 
     glDisable(GL_TEXTURE_2D);
-    //visualização dos eixos
-    //exercício: faça um plano sob a chaleira
-    glBegin(GL_LINES);
-    glLineWidth(10.0);
-    glColor3f(1.0,0.0,0.0);
-    glVertex3f(0.0, 0.0, 0.0);
-    glVertex3f(10.0, 0.0, 0.0);
-    glColor3f(0.0,1.0,0.0);
-    glVertex3f(0.0, 0.0, 0.0);
-    glVertex3f(0.0, 10.0, 0.0);
-    glColor3f(0.0,0.0,1.0);
-    glVertex3f(0.0, 0.0, 0.0);
-    glVertex3f(0.0, 0.0, 10.0);
-    glEnd();
+ 
     drawSun();
     g1.drawIsle();
-    //z.walk(g1.walls, g1.wallsLength, g1.grasses, g1.grassesLength);
-    
-    //desenha zebra ------------
-    /*
-    glBegin(GL_QUADS);
-    glColor3f(1.0, 0.1, 1.0);
-    glVertex3f(z.posX-0.5, 0.1, z.posY-0.5);
-    glVertex3f(z.posX-0.5, 0.1, z.posY+0.5);
-    glVertex3f(z.posX+0.5, 0.1, z.posY+0.5);
-    glVertex3f(z.posX+0.5, 0.1, z.posY-0.5);
-    glEnd();
-    glMatrixMode(GL_MODELVIEW);
-    glPushMatrix();
-    glTranslatef(z.posX, 0.0, z.posY);
-    glRotatef(z.rotation, 0.0, 1.0, 0.0);
-    glScalef(0.3,0.3,0.3);
-    
 
-    //glColor3f(1.0,0.0,0.0);
-    zeb->desenhar();
-    glPopMatrix();
-    */
     
     //explode zebras e leoes
     for (int i = 0; i < g1.zebrasLength; i++) {
@@ -356,10 +318,6 @@ void display(void)
         g1.lions[i].starve();
         glPopMatrix();
     }
-    
-    
-
-    
     
     
     

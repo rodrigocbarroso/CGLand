@@ -191,12 +191,6 @@ void Zebra::walk(std::vector<Wall>& walls, int wallsLength, std::vector<Grass>& 
         posX = posX + dirX;
         posY = posY + dirY;
     }
-
-    /*std::cout << " X: ";
-    std::cout << posX;
-    std::cout << " Y: ";
-    std::cout << posY;
-    std::cout << std::endl; */
     
     
     //checa colisao com GRAMA;
@@ -223,10 +217,6 @@ void Zebra::walk(std::vector<Wall>& walls, int wallsLength, std::vector<Grass>& 
         posY = -120;
     }
     
-    
-    
-
-
 
     
 }
